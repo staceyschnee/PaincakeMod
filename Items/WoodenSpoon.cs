@@ -31,7 +31,7 @@ namespace PaincakeMod.Items
 			Item.useTime = 30;
 			Item.useAnimation = 30;
 			Item.useStyle = ItemUseStyleID.Swing;
-			Item.knockBack = 0.25f;
+			Item.knockBack = 3f;
 			Item.value = 60;
 			Item.rare = ItemRarityID.White;
 			Item.UseSound = SoundID.Item1;
