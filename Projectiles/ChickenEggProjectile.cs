@@ -20,7 +20,7 @@ namespace PaincakeMod.Projectiles
 
 		public override void SetDefaults()
 		{
-			Projectile.damage = 1000;
+			Projectile.damage = 10;
 			Projectile.width = 20;
 			Projectile.height = 20;
 			Projectile.friendly = true;

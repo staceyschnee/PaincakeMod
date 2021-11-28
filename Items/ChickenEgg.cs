@@ -21,7 +21,7 @@ namespace PaincakeMod.Items
 
 		public override void SetDefaults()
 		{
-			Item.damage = 1000;
+			Item.damage = 10;
 			Item.shootSpeed = 20f;
 			Item.noMelee = true;
 			Item.DamageType = DamageClass.Ranged;
