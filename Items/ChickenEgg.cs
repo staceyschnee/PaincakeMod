@@ -32,7 +32,7 @@ namespace PaincakeMod.Items
 			Item.useStyle = ItemUseStyleID.Swing;
 			Item.knockBack = 0.25f;
 			Item.value = 100;
-			Item.rare = 1;
+			Item.rare = ItemRarityID.White; 
 			Item.UseSound = SoundID.Item1;
 			Item.autoReuse = false;
 			Item.consumable = true;
