@@ -1,0 +1,4 @@
+displayName = PainCake Mod
+author = Stacey & Josh
+version = 0.1
+includePDB = true
