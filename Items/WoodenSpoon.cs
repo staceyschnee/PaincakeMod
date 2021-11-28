@@ -17,7 +17,7 @@ namespace PaincakeMod.Items
 		public override void SetStaticDefaults()
 		{
 			// DisplayName.SetDefault("ChickenEgg"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
-			Tooltip.SetDefault("Anything can be a weaponn if you try hard enough.");
+			Tooltip.SetDefault("Anything can be a weapon if you try hard enough.");
 
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
