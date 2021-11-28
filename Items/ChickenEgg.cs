@@ -24,7 +24,7 @@ namespace PaincakeMod.Items
 			Item.damage = 10;
 			Item.shootSpeed = 20f;
 			Item.noMelee = true;
-			Item.DamageType = DamageClass.Ranged;
+			Item.DamageType = ModContent.GetInstance<DamageClasses.PaincakeClass>();
 			Item.width = 20;
             Item.height = 20;
 			Item.useTime = 20;
