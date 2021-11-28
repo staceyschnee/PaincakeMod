@@ -59,7 +59,7 @@ namespace PaincakeMod.NPCs
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
 		{
-			return  Math.Max(SpawnCondition.TownCritter.Chance * 1.3f, SpawnCondition.OverworldDayGrassCritter.Chance * 1.3f); // spawn often
+			return  Math.Max(SpawnCondition.TownCritter.Chance * 1.1f, SpawnCondition.OverworldDayGrassCritter.Chance * 1.1f); // spawn often
 		}
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
