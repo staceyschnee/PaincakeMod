@@ -26,9 +26,9 @@ namespace PaincakeMod.Tiles
 			Main.tileFrameImportant[Type] = true;
 			Main.tileObsidianKill[Type] = true;
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
-			TileObjectData.newTile.Origin = new Point16(0, 1);
+			//TileObjectData.newTile.Origin = new Point16(0, 1);
 			TileObjectData.newTile.LavaDeath = false;
-			TileObjectData.newTile.DrawYOffset = 2;
+			//TileObjectData.newTile.DrawYOffset = 2;
 			TileObjectData.addTile(Type);
 
 			ModTranslation name = CreateMapEntryName();
@@ -42,7 +42,7 @@ namespace PaincakeMod.Tiles
 		public override void AnimateTile(ref int frame, ref int frameCounter)
 		{
 			
-			// Spend 9 ticks on each of 6 frames, looping
+			// Spend 9 ticks on each of 4 frames, looping
 			if (++frameCounter >= 9) {
 				frameCounter = 0;
 				frame = ++frame % 4;
@@ -52,7 +52,7 @@ namespace PaincakeMod.Tiles
 
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 16, 48, ModContent.ItemType<GrindingMill>());
+			Item.NewItem(i * 16, j * 16, 32, 48, ModContent.ItemType<GrindingMill>());
 		}
 
 	}
