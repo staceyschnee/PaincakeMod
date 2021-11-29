@@ -45,7 +45,7 @@ namespace PaincakeMod.Items
 			recipe.AddIngredient(ItemID.Wood, 4);
 			recipe.AddIngredient(ItemID.StoneBlock, 10);
 			recipe.AddIngredient(ItemID.IronBar, 2);
-			recipe.AddTile(TileID.WorkBenches);
+			recipe.AddTile(TileID.Anvils);
 			recipe.Register();
 		}
 	}

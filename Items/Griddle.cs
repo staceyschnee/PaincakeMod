@@ -45,14 +45,14 @@ namespace PaincakeMod.Items
 				.AddIngredient(ItemID.Torch, 4)
 				.AddIngredient(ItemID.StoneBlock, 6)
 				.AddIngredient(ItemID.IronBar, 10)
-				.AddTile(TileID.WorkBenches)
+				.AddTile(TileID.Anvils)
 				.Register();
 
 			CreateRecipe()
 				.AddIngredient(ItemID.Torch, 4)
 				.AddIngredient(ItemID.StoneBlock, 6)
 				.AddIngredient(ItemID.LeadBar, 10)
-				.AddTile(TileID.WorkBenches)
+				.AddTile(TileID.Anvils)
 				.Register();
 
 		}
