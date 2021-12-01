@@ -104,12 +104,15 @@ namespace PaincakeMod.Tiles
 							if (tile.type == Type)
 							{
 								bool found = false;
-								foreach (Location loc in CoupLocations)
+								if (CoupLocations.Count > 0)
 								{
-									if (loc.Equals(width, height))
+									foreach (Location loc in CoupLocations)
 									{
-										found = true;
-										break;
+										if (loc.Equals(width, height))
+										{
+											found = true;
+											break;
+										}
 									}
 								}
 								if (!found)

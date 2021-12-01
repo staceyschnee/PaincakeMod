@@ -29,6 +29,11 @@ namespace PaincakeMod.Items
 			Item.autoReuse = true;
 		}
 
+		public override void ModifyHitNPC(Player player, NPC target, ref int damage, ref float knockBack, ref bool crit)
+        {
+			player.armorPenetration += 10000;
+        }
+
 		public override void AddRecipes()
 		{
 			Recipe recipe = CreateRecipe();
