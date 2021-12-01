@@ -28,7 +28,7 @@ namespace PaincakeMod.Tiles
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
 			//TileObjectData.newTile.Origin = new Point16(0, 1);
 			TileObjectData.newTile.LavaDeath = false;
-			//TileObjectData.newTile.DrawYOffset = 2;
+			TileObjectData.newTile.DrawYOffset = 2;
 			TileObjectData.addTile(Type);
 
 			ModTranslation name = CreateMapEntryName();

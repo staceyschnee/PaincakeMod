@@ -1,10 +1,12 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.OS;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -14,6 +16,10 @@ using Terraria.DataStructures;
 using Terraria.ModLoader.Utilities;
 using Terraria.GameContent.Creative;
 using Terraria.ObjectData;
+using Terraria.ModLoader.Core;
+using Terraria.ModLoader.Default;
+using Terraria.ModLoader.Engine;
+using Terraria.ModLoader.UI;
 using PaincakeMod.Items;
 
 
@@ -21,8 +27,44 @@ namespace PaincakeMod.Tiles
 {
 	class ChickenCoupTile : ModTile
 	{
-		int LocationX = -1;
-		int LocationY = -1;
+		class Location : IEquatable<Location>
+		{
+			public int _X { get; set; }
+			public int _Y { get; set; }
+
+			public Location(int X, int Y)
+			{
+				_X = X;
+				_Y = Y;
+			}
+			public override bool Equals(object obj)
+			{
+				if (obj == null) return false;
+				Location objAsLocation = obj as Location;
+				if (objAsLocation == null) return false;
+				else return Equals(objAsLocation);
+			}
+			public override int GetHashCode()
+			{
+				return _X * Main.maxTilesX + _Y;
+			}
+			public bool Equals(Location other)
+			{
+				if (other == null) return false;
+				return (this.Equals(other._X, other._Y));
+			}
+
+			public bool Equals(int X, int Y)
+			{
+				return (X - _X < 4 && X - _X >= 0 
+						&& Y - _Y < 3 && Y - _Y >= 0);
+			}
+		}
+
+		List<Location> CoupLocations = new List<Location>();
+
+		private bool SearchedWorld = false;
+		private Location lastLocationPlaced = new Location(0, 0);
 		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[Type] = true;
@@ -33,7 +75,7 @@ namespace PaincakeMod.Tiles
 			TileObjectData.newTile.LavaDeath = false;
 			TileObjectData.newTile.CoordinatePadding = 2;
 			TileObjectData.addTile(Type);
-
+			TileObjectData.newTile.DrawYOffset = 2;
 			ModTranslation name = CreateMapEntryName();
 			name.SetDefault("ChickenCoup");
 			AddMapEntry(new Color(150, 150, 150), name);
@@ -52,27 +94,53 @@ namespace PaincakeMod.Tiles
 			}
 			else if (frameCounter == 360)
 			{
+				if (!SearchedWorld)
+				{
+					for (int width = 0; width < Main.maxTilesX; width++)
+					{
+						for (int height = 0; height < Main.maxTilesY / 2; height++)
+						{
+							Tile tile = Main.tile[width, height];
+							if (tile.type == Type)
+							{
+								bool found = false;
+								foreach (Location loc in CoupLocations)
+								{
+									if (loc.Equals(width, height))
+									{
+										found = true;
+										break;
+									}
+								}
+								if (!found)
+								{
+									CoupLocations.Add(new Location(width, height));
+								}
+							}
+						}
+					}
+					SearchedWorld = true;
+				}
+				foreach (Location pos in CoupLocations)
+				{
+					Item.NewItem(pos._X * 16, pos._Y * 16, 20, 15, ModContent.ItemType<ChickenEgg>());
+				}
 				frameCounter = 0;
 				frame = ++frame % 2;
-				if (LocationX != -1)
-				{
-					Item.NewItem(LocationX * 16, LocationY * 16, 20, 20, ModContent.ItemType<ChickenEgg>());
-				}
 			}
-
 		}
 
-		public override ushort GetMapOption(int i, int j)
-		{
-			LocationX = i;
-			LocationY = j;
-			return 0;
-		}
+		public override void PlaceInWorld(int i, int j, Item item)
+        {
+			CoupLocations.Add(new Location(i, j));
+			base.PlaceInWorld(i, j, item);
+        }
 
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			LocationX = -1;
-			LocationY = -1;
+			Location loc = new Location(i, j);
+			CoupLocations.Remove(loc);
+			//CoupCount--;
 			Item.NewItem(i * 16, j * 16, 60, 48, ModContent.ItemType<ChickenCoup>());
 		}
 

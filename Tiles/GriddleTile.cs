@@ -28,7 +28,7 @@ namespace PaincakeMod.Tiles
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
 			TileObjectData.newTile.LavaDeath = false;
 			TileObjectData.addTile(Type);
-
+			TileObjectData.newTile.DrawYOffset = 2;
 			ModTranslation name = CreateMapEntryName();
 			name.SetDefault("Griddle");
 			AddMapEntry(new Color(200, 200, 200), name);
