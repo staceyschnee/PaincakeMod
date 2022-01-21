@@ -64,7 +64,6 @@ namespace PaincakeMod.Tiles
 		List<Location> CoupLocations = new List<Location>();
 
 		private bool SearchedWorld = false;
-		private Location lastLocationPlaced = new Location(0, 0);
 		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[Type] = true;
@@ -146,6 +145,8 @@ namespace PaincakeMod.Tiles
 			//CoupCount--;
 			Item.NewItem(i * 16, j * 16, 60, 48, ModContent.ItemType<ChickenCoup>());
 		}
+
+
 
 	}
 }
