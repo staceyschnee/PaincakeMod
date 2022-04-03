@@ -11,11 +11,11 @@ using PaincakeMod.Items;
 namespace PaincakeMod.NPCs
 {
 	// Party Zombie is a pretty basic clone of a vanilla NPC. To learn how to further adapt vanilla NPC behaviors, see https://github.com/tModLoader/tModLoader/wiki/Advanced-Vanilla-Code-Adaption#example-npc-npc-clone-with-modified-projectile-hoplite
-	public class Chicken : ModNPC
+	public class Cow : ModNPC
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Chicken");
+			DisplayName.SetDefault("Cow");
 			Main.npcFrameCount[Type] = 2; // Main.npcFrameCount[NPCID.Zombie];
 
 			// By default enemies gain health and attack if hardmode is reached. this NPC should not be affected by that
@@ -33,17 +33,17 @@ namespace PaincakeMod.NPCs
 
 		public override void SetDefaults()
 		{
-			NPC.width = 35;
-			NPC.height = 30;
+			NPC.width = 64;
+			NPC.height = 48;
 			NPC.damage = 0;
 			NPC.defense = 0;
-			NPC.lifeMax = 5;
+			NPC.lifeMax = 10;
 			NPC.HitSound = SoundID.NPCHit1;
 			NPC.DeathSound = SoundID.NPCDeath1;
 			NPC.value = 15f;
 			NPC.knockBackResist = 0f;
 			NPC.aiStyle = 7; // Fighter AI, important to choose the aiStyle that matches the NPCID that we want to mimic
-			NPC.catchItem = (short)ModContent.ItemType<ChickenItem>();
+			NPC.catchItem = (short)ModContent.ItemType<CowItem>();
 
 			AIType = NPCID.Squirrel;
 			//AnimationType = NPCID.Zombie; // Use vanilla zombie's type when executing animation code. Important to also match Main.npcFrameCount[NPC.type] in SetStaticDefaults.
@@ -54,7 +54,7 @@ namespace PaincakeMod.NPCs
 
 		public override void ModifyNPCLoot(NPCLoot npcLoot)
 		{
-			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ChickenEgg>(), 1, 1, 3)); // Drop 1-3 eggs all the time
+			npcLoot.Add(ItemDropRule.Food(ItemID.MilkCarton, 3, 1, 1)); // Drop 1 cartom of milk 33% chance
 		}
 
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -67,18 +67,20 @@ namespace PaincakeMod.NPCs
 			// We can use AddRange instead of calling Add multiple times in order to add multiple items at once
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[] {
 				// Sets the spawning conditions of this NPC that is listed in the bestiary.
-				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Times.NightTime,
+				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Times.DayTime,
 
 				// Sets the description of this NPC that is listed in the bestiary.
-				new FlavorTextBestiaryInfoElement("Its a chicken. Did you think it was going to be magical?")
+				new FlavorTextBestiaryInfoElement("Its a cow. Got Milk??")
 			});
 		}
 
 		public override void FindFrame(int frameHeight)
 		{
+			NPC.frame.Y = 0;
+#if NEVER
 			if (NPC.velocity.X != 0)
 			{
-				NPC.frameCounter += 1;
+                NPC.frameCounter += 1;
 				if (NPC.frameCounter < 10)
 				{
 					NPC.frame.Y = (int)0 * frameHeight;
@@ -92,6 +94,7 @@ namespace PaincakeMod.NPCs
 					NPC.frameCounter = 0;
 				}
 			}
+#endif
 			NPC.spriteDirection = NPC.direction;
 		}
 
@@ -111,11 +114,11 @@ namespace PaincakeMod.NPCs
 			}
 		}
 	}
-	public class ChickenItem : ModItem
+	public class CowItem : ModItem
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Chicken");
+			DisplayName.SetDefault("Cow");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 5;
 		}
 
@@ -128,11 +131,11 @@ namespace PaincakeMod.NPCs
 			Item.useTime = 10;
 			Item.maxStack = 999;
 			Item.consumable = true;
-			Item.width = 35;
-			Item.height = 30;
+			Item.width = 64;
+			Item.height = 48;
 			Item.noUseGraphic = true;
 			
-			Item.makeNPC = (short)ModContent.NPCType<Chicken>();
+			Item.makeNPC = (short)ModContent.NPCType<Cow>();
 		}
 	}
 }
