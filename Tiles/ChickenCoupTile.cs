@@ -56,8 +56,8 @@ namespace PaincakeMod.Tiles
 
 			public bool Equals(int X, int Y)
 			{
-				return (X - _X < 4 && X - _X >= 0 
-						&& Y - _Y < 3 && Y - _Y >= 0);
+				return (X - _X < 4 && X - _X >= -4 
+						&& Y - _Y < 3 && Y - _Y >= -3);
 			}
 		}
 
@@ -100,7 +100,7 @@ namespace PaincakeMod.Tiles
 						for (int height = 0; height < Main.maxTilesY / 2; height++)
 						{
 							Tile tile = Main.tile[width, height];
-							if (tile.type == Type)
+							if (tile.TileType == Type)
 							{
 								bool found = false;
 								if (CoupLocations.Count > 0)
@@ -125,7 +125,7 @@ namespace PaincakeMod.Tiles
 				}
 				foreach (Location pos in CoupLocations)
 				{
-					Item.NewItem(pos._X * 16, pos._Y * 16, 20, 15, ModContent.ItemType<ChickenEgg>());
+					Item.NewItem(new EntitySource_TileBreak(pos._X, pos._Y), pos._X * 16, pos._Y * 16, 20, 15, ModContent.ItemType<ChickenEgg>());
 				}
 				frameCounter = 0;
 				frame = ++frame % 2;
@@ -143,7 +143,7 @@ namespace PaincakeMod.Tiles
 			Location loc = new Location(i, j);
 			CoupLocations.Remove(loc);
 			//CoupCount--;
-			Item.NewItem(i * 16, j * 16, 60, 48, ModContent.ItemType<ChickenCoup>());
+			Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 60, 48, ModContent.ItemType<ChickenCoup>());
 		}
 
 
