@@ -16,7 +16,7 @@ namespace PaincakeMod.NPCs
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Cow");
-			Main.npcFrameCount[Type] = 2; // Main.npcFrameCount[NPCID.Zombie];
+			Main.npcFrameCount[Type] = 1; // Main.npcFrameCount[NPCID.Zombie];
 
 			// By default enemies gain health and attack if hardmode is reached. this NPC should not be affected by that
 			NPCID.Sets.DontDoHardmodeScaling[Type] = true;
