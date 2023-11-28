@@ -20,6 +20,10 @@ using Terraria.ModLoader.Core;
 using Terraria.ModLoader.Default;
 using Terraria.ModLoader.Engine;
 using Terraria.ModLoader.UI;
+using Terraria.Enums;
+using Terraria.GameContent.ObjectInteractions;
+using Terraria.Localization;
+
 using PaincakeMod.Items;
 
 
@@ -75,10 +79,7 @@ namespace PaincakeMod.Tiles
 			TileObjectData.newTile.CoordinatePadding = 2;
 			TileObjectData.addTile(Type);
 			TileObjectData.newTile.DrawYOffset = 2;
-			ModTranslation name = CreateMapEntryName();
-			name.SetDefault("ChickenCoup");
-			AddMapEntry(new Color(150, 150, 150), name);
-
+			AddMapEntry(new Color(200, 200, 200), Language.GetText("MapObject.ChickenCoup"));
 			//Can't use this since texture is vertical
 			AnimationFrameHeight = 52;
 		}

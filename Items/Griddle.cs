@@ -18,7 +18,7 @@ namespace PaincakeMod.Items
 	{
 		public override void SetStaticDefaults()
 		{
-			Tooltip.SetDefault("Used for special crafting");
+			//Tooltip.SetDefault("Used for special crafting");
 
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}

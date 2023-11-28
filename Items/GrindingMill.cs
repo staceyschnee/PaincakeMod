@@ -18,7 +18,7 @@ namespace PaincakeMod.Items
 	{
 		public override void SetStaticDefaults()
 		{
-			Tooltip.SetDefault("Grinding Mill");
+			//Tooltip.SetDefault("Grinding Mill");
 
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}

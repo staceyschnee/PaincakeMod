@@ -19,7 +19,7 @@ namespace PaincakeMod.Items
 	{
 		public override void SetStaticDefaults()
 		{
-			Tooltip.SetDefault("Want come eggs?");
+			//Tooltip.SetDefault("Want come eggs?");
 
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}

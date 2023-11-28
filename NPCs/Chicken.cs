@@ -6,6 +6,7 @@ using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ModLoader.Utilities;
 using Terraria.GameContent.Creative;
+using Terraria.DataStructures;
 using PaincakeMod.Items;
 
 namespace PaincakeMod.NPCs
@@ -15,7 +16,7 @@ namespace PaincakeMod.NPCs
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Chicken");
+			//DisplayName.SetDefault("Chicken");
 			Main.npcFrameCount[Type] = 2; // Main.npcFrameCount[NPCID.Zombie];
 
 			// By default enemies gain health and attack if hardmode is reached. this NPC should not be affected by that
@@ -96,7 +97,7 @@ namespace PaincakeMod.NPCs
 		}
 
 
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
 			// Spawn confetti when this zombie is hit.
 			for (int i = 0; i < 10; i++)
@@ -115,7 +116,7 @@ namespace PaincakeMod.NPCs
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Chicken");
+			//DisplayName.SetDefault("Chicken");
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 5;
 		}
 

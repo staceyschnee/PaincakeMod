@@ -1,9 +1,12 @@
-﻿using Terraria;
+﻿using System.Collections.Generic;
+using Terraria;
+using Terraria.Localization;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria.GameContent.Creative;
+using System.Configuration;
 
 namespace PaincakeMod.DamageClasses
 {
@@ -11,19 +14,22 @@ namespace PaincakeMod.DamageClasses
     {
         public override void SetStaticDefaults()
         {
-            ClassName.SetDefault("paincake damage");
         }
 
-        protected override float GetBenefitFrom(DamageClass damageClass)
+        public override bool GetEffectInheritance(DamageClass damageClass)
         {
             if (damageClass == DamageClass.Generic)
-                return 1f;
+                return true;
 
-            return 0;
-        }
-        public override bool CountsAs(DamageClass damageClass)
-        {
             return false;
+        }
+        public virtual StatInheritanceData GetModifierInheritance(DamageClass damageClass)
+        {
+            if (damageClass != Generic)
+            {
+                return StatInheritanceData.None;
+            }
+            return StatInheritanceData.Full;
         }
     }
 }

@@ -14,6 +14,9 @@ using Terraria.DataStructures;
 using Terraria.ModLoader.Utilities;
 using Terraria.GameContent.Creative;
 using Terraria.ObjectData;
+using Terraria.Enums;
+using Terraria.GameContent.ObjectInteractions;
+using Terraria.Localization;
 using PaincakeMod.Items;
 
 
@@ -29,9 +32,7 @@ namespace PaincakeMod.Tiles
 			TileObjectData.newTile.LavaDeath = false;
 			TileObjectData.addTile(Type);
 			TileObjectData.newTile.DrawYOffset = 2;
-			ModTranslation name = CreateMapEntryName();
-			name.SetDefault("Griddle");
-			AddMapEntry(new Color(200, 200, 200), name);
+			AddMapEntry(new Color(200, 200, 200), Language.GetText("MapObject.Griddle"));
 
 			//Can't use this since texture is vertical
 			//AnimationFrameHeight = 34;

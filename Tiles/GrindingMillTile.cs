@@ -11,9 +11,12 @@ using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.DataStructures;
+using Terraria.Enums;
+using Terraria.GameContent.ObjectInteractions;
+using Terraria.Localization;
+using Terraria.ObjectData;
 using Terraria.ModLoader.Utilities;
 using Terraria.GameContent.Creative;
-using Terraria.ObjectData;
 using PaincakeMod.Items;
 
 
@@ -31,9 +34,7 @@ namespace PaincakeMod.Tiles
 			TileObjectData.newTile.DrawYOffset = 2;
 			TileObjectData.addTile(Type);
 
-			ModTranslation name = CreateMapEntryName();
-			name.SetDefault("Grinding Mill");
-			AddMapEntry(new Color(200, 200, 200), name);
+			AddMapEntry(new Color(200, 200, 200), Language.GetText("MapObject.GrindingMill"));
 			 
 			//Can't use this since texture is vertical
 			AnimationFrameHeight = 34;

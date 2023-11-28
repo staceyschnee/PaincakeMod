@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -9,7 +10,7 @@ namespace PaincakeMod.Items
 		public override void SetStaticDefaults()
 		{
 			// DisplayName.SetDefault("SplatSword"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
-			Tooltip.SetDefault("This is a basic modded sword.");
+			//Tooltip.SetDefault("This is a basic modded sword.");
 		}
 
 		public override void SetDefaults()
@@ -29,9 +30,9 @@ namespace PaincakeMod.Items
 			Item.autoReuse = true;
 		}
 
-		public override void ModifyHitNPC(Player player, NPC target, ref int damage, ref float knockBack, ref bool crit)
+		public override void ModifyHitNPC(Player player, NPC target, ref NPC.HitModifiers modifiers)
         {
-			player.armorPenetration += 10000;
+			modifiers.ArmorPenetration += 5000f;
         }
 
 		public override void AddRecipes()

@@ -1,0 +1,59 @@
+Mods: {
+	PaincakeMod: {
+		DamageClassName.PaincakeClass: Paincake Damage
+
+		Items: {
+			ChickenCoup: {
+				DisplayName: Chicken Coup
+				Tooltip: ""
+			}
+
+			ChickenEgg: {
+				DisplayName: Chicken Egg
+				Tooltip: ""
+			}
+
+			Flour: {
+				DisplayName: Flour
+				Tooltip: ""
+			}
+
+			Griddle: {
+				DisplayName: Griddle
+				Tooltip: ""
+			}
+
+			GrindingMill: {
+				DisplayName: Grinding Mill
+				Tooltip: ""
+			}
+
+			SplatSword: {
+				DisplayName: Splat Sword
+				Tooltip: ""
+			}
+
+			WoodenSpoon: {
+				DisplayName: Wooden Spoon
+				Tooltip: ""
+			}
+
+			ChickenItem: {
+				DisplayName: Chicken Item
+				Tooltip: ""
+			}
+
+			CowItem: {
+				DisplayName: Cow Item
+				Tooltip: ""
+			}
+		}
+
+		NPCs: {
+			Chicken.DisplayName: Chicken
+			Cow.DisplayName: Cow
+		}
+
+		Projectiles.ChickenEggProjectile.DisplayName: Chicken Egg Projectile
+	}
+}

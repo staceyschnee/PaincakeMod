@@ -23,6 +23,7 @@ using Terraria.GameContent;
 using Terraria.ModLoader.Assets;
 using ReLogic.Content.Sources;
 using ReLogic.Graphics;
+using PaincakeMod.Tiles;
 
 namespace PaincakeMod.Items
 {
@@ -35,10 +36,10 @@ namespace PaincakeMod.Items
        
         public override void AddRecipes()
         {
-            Recipe recipe = Mod.CreateRecipe(ItemID.FriedEgg, 1);
-            recipe.AddIngredient(ModContent.ItemType<ChickenEgg>(), 2);
-            recipe.AddTile(ModContent.GetInstance<Tiles.GriddleTile>());
-            recipe.Register();
+            Recipe.Create(ItemID.FriedEgg, 1)
+				.AddIngredient(ModContent.ItemType<ChickenEgg>(), 2)
+				.AddTile(ModContent.GetInstance<Tiles.GrindingMillTile>())
+				.Register();
         }
     }
 }

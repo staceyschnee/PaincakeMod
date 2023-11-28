@@ -11,7 +11,7 @@ namespace PaincakeMod.Items
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("It's just flour.");
+            //Tooltip.SetDefault("It's just flour.");
 
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 50;
         }

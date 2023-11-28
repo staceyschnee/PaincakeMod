@@ -29,7 +29,7 @@ namespace PaincakeMod.Projectiles
 			Projectile.timeLeft = 600;
 		}
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
 		{
 			Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height); //makes dust based on tile
 			SoundEngine.PlaySound(SoundID.NPCDeath1, Projectile.position); //plays impact sound
