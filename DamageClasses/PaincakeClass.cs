@@ -10,7 +10,7 @@ using System.Configuration;
 
 namespace PaincakeMod.DamageClasses
 {
-    class PaincakeClass : DamageClass
+    class PaincakeDamage : DamageClass
     {
         public override void SetStaticDefaults()
         {
@@ -23,7 +23,7 @@ namespace PaincakeMod.DamageClasses
 
             return false;
         }
-        public virtual StatInheritanceData GetModifierInheritance(DamageClass damageClass)
+        public override StatInheritanceData GetModifierInheritance(DamageClass damageClass)
         {
             if (damageClass != Generic)
             {

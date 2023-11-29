@@ -1,7 +1,5 @@
 Mods: {
 	PaincakeMod: {
-		DamageClassName.PaincakeClass: Paincake Damage
-
 		Items: {
 			ChickenCoup: {
 				DisplayName: Chicken Coup
@@ -30,7 +28,7 @@ Mods: {
 
 			SplatSword: {
 				DisplayName: Splat Sword
-				Tooltip: ""
+				Tooltip: This is the kill everything Sword
 			}
 
 			WoodenSpoon: {
@@ -39,12 +37,22 @@ Mods: {
 			}
 
 			ChickenItem: {
-				DisplayName: Chicken Item
+				DisplayName: Chicken
 				Tooltip: ""
 			}
 
 			CowItem: {
-				DisplayName: Cow Item
+				DisplayName: Cow
+				Tooltip: ""
+			}
+
+			Paincake: {
+				DisplayName: Paincake
+				Tooltip: ""
+			}
+
+			IronSpatula: {
+				DisplayName: Iron Spatula
 				Tooltip: ""
 			}
 		}
@@ -54,6 +62,9 @@ Mods: {
 			Cow.DisplayName: Cow
 		}
 
-		Projectiles.ChickenEggProjectile.DisplayName: Chicken Egg Projectile
+		Projectiles: {
+			ChickenEggProjectile.DisplayName: Chicken Egg Projectile
+			PaincakeProjectile.DisplayName: Paincake Projectile
+		}
 	}
 }

@@ -9,41 +9,58 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria.GameContent.Creative;
+using Terraria.Enums;
+using Terraria.Utilities;
 
 namespace PaincakeMod.Items
 {
-    public class WoodenSpoon : ModItem
+    public class IronSpatula : ModItem
     {
 		public override void SetStaticDefaults()
 		{
-			// DisplayName.SetDefault("ChickenEgg"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
-			//Tooltip.SetDefault("Anything can be a weapon if you try hard enough.");
-
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
 
 		public override void SetDefaults()
 		{
-			Item.damage = 5;
+			Item.damage = 10;
 			Item.DamageType = ModContent.GetInstance<DamageClasses.PaincakeDamage>();
-			Item.width = 30;
-			Item.height = 30;
-			Item.useTime = 30;
-			Item.useAnimation = 30;
+			Item.width = 32;
+			Item.height = 32;
+			Item.useTime = 15;
+			Item.useAnimation = 10;
 			Item.useStyle = ItemUseStyleID.Swing;
 			Item.knockBack = 3f;
-			Item.value = 60;
-			Item.rare = ItemRarityID.White;
+			Item.value = 100;
+			Item.rare = ItemRarityID.Yellow;
 			Item.UseSound = SoundID.Item1;
 			Item.autoReuse = false;
 			Item.consumable = false;
 			Item.maxStack = 1;
+			Item.shoot = ModContent.ProjectileType<Projectiles.PaincakeProjectile>();
+			Item.shootSpeed = 15f;
+			Item.useAmmo = ModContent.ItemType<Items.Paincake>();
+		}
+
+		public override bool AllowPrefix(int pre) 
+		{
+			return true;
+		}
+
+		public override bool MeleePrefix() 
+		{
+			return true;
+		}
+
+		public override bool RangedPrefix() 
+		{
+			return true;
 		}
 
 		public override void AddRecipes()
 		{
 			Recipe recipe = CreateRecipe();
-			recipe.AddIngredient(ItemID.Wood, 12);
+			recipe.AddIngredient(ItemID.IronBar, 8);
 			recipe.AddTile(TileID.WorkBenches);
 			recipe.Register();
 		}

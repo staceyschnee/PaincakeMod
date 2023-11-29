@@ -16,7 +16,7 @@ namespace PaincakeMod.Items
 		public override void SetDefaults()
 		{
 			Item.damage = 5000;
-			Item.DamageType = DamageClass.Melee;
+			Item.DamageType = ModContent.GetInstance<DamageClasses.PaincakeDamage>();
 			Item.width = 200;
 			Item.height = 200;
 			Item.useTime = 5;

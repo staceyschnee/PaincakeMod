@@ -9,36 +9,37 @@ using PaincakeMod.Projectiles;
 
 namespace PaincakeMod.Items
 {
-	public class ChickenEgg : ModItem
+	public class Paincake : ModItem
 	{ 
 		public override void SetStaticDefaults()
 		{
 			// DisplayName.SetDefault("ChickenEgg"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
 			//Tooltip.SetDefault("Its an egg silly.");
 
-			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 25;
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 200;
 		}
 
 		public override void SetDefaults()
 		{
 			Item.damage = 10;
-			Item.shootSpeed = 12f;
-			Item.noMelee = true;
+			Item.shootSpeed = 10f;
+			//Item.noMelee = true;
 			Item.DamageType = ModContent.GetInstance<DamageClasses.PaincakeDamage>();
-			Item.width = 20;
-            Item.height = 15;
-			Item.useTime = 20;
-			Item.useAnimation = 20;
-			Item.useStyle = ItemUseStyleID.Swing;
+			Item.width = 32;
+            Item.height = 32;
+			//Item.useTime = 15;
+			//Item.useAnimation = 20;
+			//Item.useStyle = ItemUseStyleID.Swing;
 			Item.knockBack = 0.25f;
-			Item.value = 100;
+			Item.value = 10;
 			Item.rare = ItemRarityID.White; 
-			Item.UseSound = SoundID.Item1;
-			Item.autoReuse = false;
+			//Item.UseSound = SoundID.Item1;
+			Item.autoReuse = true;
 			Item.consumable = true;
-			Item.maxStack = 999;
+			Item.maxStack = 9999;
 			Item.noUseGraphic = true;
-			Item.shoot = ModContent.ProjectileType<Projectiles.ChickenEggProjectile>();
+			Item.shoot = ModContent.ProjectileType<Projectiles.PaincakeProjectile>();
+			Item.ammo = Item.type; // this is the first Paincake, so it is the ammo type
 		}
 
 		/*public override bool CanUseItem(Player player)
@@ -66,9 +67,11 @@ namespace PaincakeMod.Items
 //#endif
 		public override void AddRecipes()
 		{
-			Recipe recipe = CreateRecipe();
-			recipe.AddIngredient(ItemID.Wood, 1);
-			recipe.AddTile(TileID.WorkBenches);
+			Recipe recipe = CreateRecipe(25);
+			recipe.AddIngredient(ItemID.MilkCarton, 1);
+			recipe.AddIngredient(ModContent.ItemType<ChickenEgg>(), 2);
+			recipe.AddIngredient(ModContent.ItemType<Flour>(), 2);
+			recipe.AddTile(ModContent.GetInstance<Tiles.GriddleTile>());
 			recipe.Register();
 		}
 	}

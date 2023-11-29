@@ -29,17 +29,27 @@ using PaincakeMod.Items;
 
 namespace PaincakeMod.Tiles
 {
+	public static class Constants
+	{
+		public const long eggProducedFrameCount = 360;
+	}
+
 	class ChickenCoupTile : ModTile
 	{
+
 		class Location : IEquatable<Location>
 		{
 			public int _X { get; set; }
 			public int _Y { get; set; }
+			public long _eggCount {get; set; }
+			public long _eggProduced {get; set; }
 
-			public Location(int X, int Y)
+			public Location(int X, int Y, long eggCount)
 			{
 				_X = X;
 				_Y = Y;
+				_eggCount = eggCount;
+				_eggProduced = eggCount;
 			}
 			public override bool Equals(object obj)
 			{
@@ -63,6 +73,18 @@ namespace PaincakeMod.Tiles
 				return (X - _X < 4 && X - _X >= -4 
 						&& Y - _Y < 3 && Y - _Y >= -3);
 			}
+
+			public long getEggs()
+			{
+				long count = _eggCount - _eggProduced;
+				_eggProduced = _eggCount;
+				return count;
+			}
+			public void addEggs()
+			{
+				long totalEggs = Main.GameUpdateCount / Constants.eggProducedFrameCount;
+				_eggCount = totalEggs;
+			}
 		}
 
 		List<Location> CoupLocations = new List<Location>();
@@ -84,17 +106,39 @@ namespace PaincakeMod.Tiles
 			AnimationFrameHeight = 52;
 		}
 
+		public override void AnimateIndividualTile(int type, int i, int j, ref int frameXOffset, ref int frameYOffset) 
+		{
+			bool found = false;
+			if (CoupLocations.Count > 0)
+			{
+				foreach (Location loc in CoupLocations)
+				{
+					if (loc.Equals(i, j))
+					{
+						found = true;
+						break;
+					}
+				}
+			}
+			if (!found)
+			{
+				long totalEggs = Main.GameUpdateCount / Constants.eggProducedFrameCount;
+				CoupLocations.Add(new Location(i, j, totalEggs));
+			}
+		}
+
+
 		public override void AnimateTile(ref int frame, ref int frameCounter)
 		{
 			++frameCounter;
 			// Spend 9 ticks on each of 4 frames, looping
-			if (frameCounter == 300)
+			if (frameCounter == Constants.eggProducedFrameCount - 60)
 			{ 
 				frame = ++frame % 2;
 			}
-			else if (frameCounter == 360)
+			else if (frameCounter == Constants.eggProducedFrameCount)
 			{
-				if (!SearchedWorld)
+				/*if (!SearchedWorld)
 				{
 					for (int width = 0; width < Main.maxTilesX; width++)
 					{
@@ -123,10 +167,11 @@ namespace PaincakeMod.Tiles
 						}
 					}
 					SearchedWorld = true;
-				}
+				} */
 				foreach (Location pos in CoupLocations)
 				{
-					Item.NewItem(new EntitySource_TileBreak(pos._X, pos._Y), pos._X * 16, pos._Y * 16, 20, 15, ModContent.ItemType<ChickenEgg>());
+					pos.addEggs();
+					Item.NewItem(new EntitySource_TileBreak(pos._X, pos._Y), pos._X * 16, pos._Y * 16, 20, 15, ModContent.ItemType<ChickenEgg>(), (int)pos.getEggs());
 				}
 				frameCounter = 0;
 				frame = ++frame % 2;
@@ -135,16 +180,17 @@ namespace PaincakeMod.Tiles
 
 		public override void PlaceInWorld(int i, int j, Item item)
         {
-			CoupLocations.Add(new Location(i, j));
+			long totalEggs = Main.GameUpdateCount / Constants.eggProducedFrameCount;
+			CoupLocations.Add(new Location(i, j, totalEggs));		
 			base.PlaceInWorld(i, j, item);
         }
 
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Location loc = new Location(i, j);
+			Location loc = new Location(i, j, 0);
 			CoupLocations.Remove(loc);
 			//CoupCount--;
-			Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 60, 48, ModContent.ItemType<ChickenCoup>());
+			//Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 60, 48, ModContent.ItemType<ChickenCoup>(), 1);
 		}
 
 
