@@ -36,7 +36,7 @@ namespace PaincakeMod.Items
 			Item.UseSound = SoundID.Item1;
 			Item.autoReuse = false;
 			Item.consumable = true;
-			Item.maxStack = 999;
+			Item.maxStack = 9999;
 			Item.noUseGraphic = true;
 			Item.shoot = ModContent.ProjectileType<Projectiles.ChickenEggProjectile>();
 		}

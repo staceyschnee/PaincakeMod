@@ -55,6 +55,21 @@ Mods: {
 				DisplayName: Iron Spatula
 				Tooltip: ""
 			}
+
+			GoldSpatula: {
+				DisplayName: Gold Spatula
+				Tooltip: ""
+			}
+
+			SilverSpatula: {
+				DisplayName: Silver Spatula
+				Tooltip: ""
+			}
+
+			CowPen: {
+				DisplayName: Cow Pen
+				Tooltip: ""
+			}
 		}
 
 		NPCs: {

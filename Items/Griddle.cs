@@ -36,7 +36,7 @@ namespace PaincakeMod.Items
 			Item.autoReuse = true;
 			Item.consumable = true;
 			Item.useTurn = true;
-			Item.maxStack = 999;
+			Item.maxStack = 9999;
 			Item.createTile = ModContent.TileType<GriddleTile>();
 		}
 		public override void AddRecipes()

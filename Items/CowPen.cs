@@ -15,20 +15,18 @@ using PaincakeMod.NPCs;
 
 namespace PaincakeMod.Items
 {
-	class ChickenCoup : ModItem
+	class CowPen : ModItem
 	{
 		public override void SetStaticDefaults()
 		{
-			//Tooltip.SetDefault("Want come eggs?");
-
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
 
 		public override void SetDefaults()
 		{
-			Item.width = 53;
-			Item.height = 48;
-			Item.value = 1050;
+			Item.width = 80;
+			Item.height = 60;
+			Item.value = 2243;
 			Item.useAnimation = 15;
 			Item.useTime = 10;
 			Item.useStyle = ItemUseStyleID.Swing;
@@ -38,14 +36,14 @@ namespace PaincakeMod.Items
 			Item.consumable = true;
 			Item.useTurn = true;
 			Item.maxStack = 9999;
-			Item.createTile = ModContent.TileType<ChickenCoupTile>();
+			Item.createTile = ModContent.TileType<CowPenTile>();
 		}
 		public override void AddRecipes()
 		{
 			CreateRecipe()
-				.AddIngredient(ModContent.ItemType<ChickenItem>(), 6)
-				.AddIngredient(ItemID.Wood, 10)
-				.AddIngredient(ItemID.Hay, 10)
+				.AddIngredient(ModContent.ItemType<CowItem>(), 6)
+                .AddIngredient(ItemID.Wood, 30)
+				.AddIngredient(ItemID.Hay, 20)
 				.AddTile(TileID.WorkBenches)
 				.Register();
 		}

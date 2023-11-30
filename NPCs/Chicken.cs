@@ -127,7 +127,7 @@ namespace PaincakeMod.NPCs
 			Item.useTurn = true;
 			Item.useAnimation = 15;
 			Item.useTime = 10;
-			Item.maxStack = 999;
+			Item.maxStack = 9999;
 			Item.consumable = true;
 			Item.width = 35;
 			Item.height = 30;
