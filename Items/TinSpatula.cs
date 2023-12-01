@@ -14,7 +14,7 @@ using Terraria.Utilities;
 
 namespace PaincakeMod.Items
 {
-    public class IronSpatula : ModItem
+    public class TinSpatula : ModItem
     {
 		public override void SetStaticDefaults()
 		{
@@ -23,12 +23,12 @@ namespace PaincakeMod.Items
 
 		public override void SetDefaults()
 		{
-			Item.damage = 10;
+			Item.damage = 8;
 			Item.DamageType = ModContent.GetInstance<DamageClasses.PaincakeDamage>();
-			Item.width = 34;
-			Item.height = 34;
-			Item.useTime = 15;
-			Item.useAnimation = 10;
+			Item.width = 32;
+			Item.height = 32;
+			Item.useTime = 20;
+			Item.useAnimation = 15;
 			Item.useStyle = ItemUseStyleID.Swing;
 			Item.knockBack = 3f;
 			Item.value = 100;
@@ -38,7 +38,7 @@ namespace PaincakeMod.Items
 			Item.consumable = false;
 			Item.maxStack = 1;
 			Item.shoot = ModContent.ProjectileType<Projectiles.PaincakeProjectile>();
-			Item.shootSpeed = 15f;
+			Item.shootSpeed = 12f;
 			Item.useAmmo = ModContent.ItemType<Items.Paincake>();
 		}
 
@@ -60,7 +60,7 @@ namespace PaincakeMod.Items
 		public override void AddRecipes()
 		{
 			Recipe recipe = CreateRecipe();
-			recipe.AddIngredient(ItemID.IronBar, 8);
+			recipe.AddIngredient(ItemID.TinBar, 8);
 			recipe.AddTile(TileID.WorkBenches);
 			recipe.Register();
 		}

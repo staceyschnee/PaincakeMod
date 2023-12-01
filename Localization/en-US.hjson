@@ -38,12 +38,12 @@ Mods: {
 
 			ChickenItem: {
 				DisplayName: Chicken
-				Tooltip: ""
+				Tooltip: It's a chicken, silly
 			}
 
 			CowItem: {
 				DisplayName: Cow
-				Tooltip: ""
+				Tooltip: Moo
 			}
 
 			Paincake: {
@@ -68,6 +68,41 @@ Mods: {
 
 			CowPen: {
 				DisplayName: Cow Pen
+				Tooltip: ""
+			}
+
+			CopperSpatula: {
+				DisplayName: Copper Spatula
+				Tooltip: ""
+			}
+
+			CrimtaneSpatula: {
+				DisplayName: Crimtane Spatula
+				Tooltip: ""
+			}
+
+			DemoniteSpatula: {
+				DisplayName: Demonite Spatula
+				Tooltip: ""
+			}
+
+			LeadSpatula: {
+				DisplayName: Lead Spatula
+				Tooltip: ""
+			}
+
+			PlatinumSpatula: {
+				DisplayName: Platinum Spatula
+				Tooltip: ""
+			}
+
+			TinSpatula: {
+				DisplayName: Tin Spatula
+				Tooltip: ""
+			}
+
+			TungstenSpatula: {
+				DisplayName: Tungsten Spatula
 				Tooltip: ""
 			}
 		}

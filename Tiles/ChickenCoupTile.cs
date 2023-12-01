@@ -91,7 +91,7 @@ namespace PaincakeMod.Tiles
 			Main.tileFrameImportant[Type] = true;
 			Main.tileObsidianKill[Type] = true;
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style3x3);
-			TileObjectData.newTile.Width = 4; // because the template is for 4x2 not 4x3
+			TileObjectData.newTile.Width = 4; // because the template is for 3x3 not 4x3
 			//TileObjectData.newTile.Origin = new Point16(1, 2);
 			TileObjectData.newTile.LavaDeath = false;
 			TileObjectData.newTile.CoordinatePadding = 2;
@@ -99,7 +99,7 @@ namespace PaincakeMod.Tiles
 			TileObjectData.newTile.DrawYOffset = 2;
 			AddMapEntry(new Color(200, 200, 200), Language.GetText("MapObject.ChickenCoup"));
 			//Can't use this since texture is vertical
-			AnimationFrameHeight = 52;
+			AnimationFrameHeight = 56;
 		}
 
 		public override void AnimateIndividualTile(int type, int i, int j, ref int frameXOffset, ref int frameYOffset) 
