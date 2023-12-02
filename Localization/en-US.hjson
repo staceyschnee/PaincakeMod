@@ -115,6 +115,7 @@ Mods: {
 		NPCs: {
 			Chicken.DisplayName: Chicken
 			Cow.DisplayName: Cow
+			JellyDonut.DisplayName: Jelly Donut
 		}
 
 		Projectiles: {
