@@ -9,7 +9,7 @@ using PaincakeMod.Projectiles;
 
 namespace PaincakeMod.Items
 {
-	public class ChickenEgg : ModItem
+	public class Croissant : ModItem
 	{ 
 		public override void SetStaticDefaults()
 		{
@@ -22,23 +22,23 @@ namespace PaincakeMod.Items
 		public override void SetDefaults()
 		{
 			Item.damage = 10;
-			Item.shootSpeed = 12f;
+			Item.shootSpeed = 10f;
 			Item.noMelee = true;
 			Item.DamageType = ModContent.GetInstance<DamageClasses.PaincakeDamage>();
-			Item.width = 20;
-            Item.height = 15;
+			Item.width = 22;
+            Item.height = 32;
 			Item.useTime = 20;
-			Item.useAnimation = 20;
+			Item.useAnimation = 10;
 			Item.useStyle = ItemUseStyleID.Swing;
-			Item.knockBack = 0.25f;
-			Item.value = 100;
-			Item.rare = ItemRarityID.White; 
+			Item.knockBack = 1f;
+			Item.value = 250;
+			Item.rare = ItemRarityID.Green; 
 			Item.UseSound = SoundID.Item1;
 			Item.autoReuse = false;
-			Item.consumable = true;
-			Item.maxStack = 9999;
+			Item.consumable = false;
+			Item.maxStack = 5;
 			Item.noUseGraphic = true;
-			Item.shoot = ModContent.ProjectileType<Projectiles.ChickenEggProjectile>();
+			Item.shoot = ModContent.ProjectileType<Projectiles.CroissantProjectile>();
 		}
 
 		/*public override bool CanUseItem(Player player)
@@ -64,5 +64,13 @@ namespace PaincakeMod.Items
 			return false;
 		}*/
 //#endif
+		public override void AddRecipes()
+		{
+			Recipe recipe = CreateRecipe();
+			recipe.AddIngredient(ModContent.ItemType<ChickenEgg>(), 2);
+            recipe.AddIngredient(ModContent.ItemType<Flour>(), 4);
+            recipe.AddTile(TileID.WorkBenches);
+			recipe.Register();
+		}
 	}
 }

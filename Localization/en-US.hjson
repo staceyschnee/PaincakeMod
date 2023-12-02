@@ -105,6 +105,11 @@ Mods: {
 				DisplayName: Tungsten Spatula
 				Tooltip: ""
 			}
+
+			Croissant: {
+				DisplayName: Croissant
+				Tooltip: ""
+			}
 		}
 
 		NPCs: {
@@ -115,6 +120,7 @@ Mods: {
 		Projectiles: {
 			ChickenEggProjectile.DisplayName: Chicken Egg Projectile
 			PaincakeProjectile.DisplayName: Paincake Projectile
+			CroissantProjectile.DisplayName: Croissant Projectile
 		}
 	}
 }
