@@ -22,10 +22,10 @@ namespace PaincakeMod.Items
 			Item.useTime = 5;
 			Item.useTurn = true;
 			Item.useAnimation = 5;
-			Item.useStyle = 1;
+			Item.useStyle = ItemUseStyleID.Swing;
 			Item.knockBack = 10f;
 			Item.value = 10000;
-			Item.rare = 2;
+			Item.rare = ItemRarityID.Green;
 			Item.UseSound = SoundID.Item1;
 			Item.autoReuse = true;
 		}

@@ -37,7 +37,7 @@ namespace PaincakeMod.Tiles
 			AddMapEntry(new Color(200, 200, 200), Language.GetText("MapObject.GrindingMill"));
 			 
 			//Can't use this since texture is vertical
-			AnimationFrameHeight = 34;
+			AnimationFrameHeight = 36;
 		}
 
 		public override void AnimateTile(ref int frame, ref int frameCounter)
@@ -51,10 +51,10 @@ namespace PaincakeMod.Tiles
 
 		}
 
-		public override void KillMultiTile(int i, int j, int frameX, int frameY)
-		{
-			Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 32, 48, ModContent.ItemType<GrindingMill>());
-		}
+		//public override void KillMultiTile(int i, int j, int frameX, int frameY)
+		//{
+		//	Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 32, 48, ModContent.ItemType<GrindingMill>());
+		//}
 
 	}
 }

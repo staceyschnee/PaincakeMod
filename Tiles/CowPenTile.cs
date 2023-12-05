@@ -84,7 +84,6 @@ namespace PaincakeMod.Tiles
 
 		List<Location> penLocations = new List<Location>();
 
-		private bool SearchedWorld = false;
 		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[Type] = true;

@@ -110,6 +110,21 @@ Mods: {
 				DisplayName: Croissant
 				Tooltip: ""
 			}
+
+			BlueberryPaincake: {
+				DisplayName: Blueberry Paincake
+				Tooltip: ""
+			}
+
+			CacaoPod: {
+				DisplayName: Cacao Pod
+				Tooltip: ""
+			}
+
+			ChocolateChipPaincake: {
+				DisplayName: Chocolate Chip Paincake
+				Tooltip: ""
+			}
 		}
 
 		NPCs: {
@@ -122,6 +137,8 @@ Mods: {
 			ChickenEggProjectile.DisplayName: Chicken Egg Projectile
 			PaincakeProjectile.DisplayName: Paincake Projectile
 			CroissantProjectile.DisplayName: Croissant Projectile
+			BlueberryPaincakeProjectile.DisplayName: Blueberry Paincake Projectile
+			ChocolateChipPaincakeProjectile.DisplayName: Chocolate Chip Paincake Projectile
 		}
 	}
 }
