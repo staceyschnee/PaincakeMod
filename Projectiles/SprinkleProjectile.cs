@@ -10,31 +10,31 @@ using Terraria.ModLoader;
 
 namespace PaincakeMod.Projectiles
 {
-	public class PaincakeProjectile : ModProjectile
+	public class SprinkleProjectile : ModProjectile
 	{ 
 		public override void SetStaticDefaults()
 		{
-			// DisplayName.SetDefault("ChickenEgg"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
-			//Tooltip.SetDefault("Its an egg silly.");
 		}
 
 		public override void SetDefaults()
 		{
-			Projectile.damage = 10;
-			Projectile.width = 10;
-			Projectile.height = 32;
-			Projectile.friendly = true;
-			Projectile.penetrate = 1;
+			//Projectile.CloneDefaults(ProjectileID.SpikedSlimeSpike);
+			Projectile.damage = 5;
+			Projectile.width = 4;
+			Projectile.height = 12;
+			Projectile.knockBack = 1f;
+			//Projectile.friendly = false;
+			Projectile.hostile = true;
+			Projectile.penetrate = 2;
 			Projectile.aiStyle = ProjAIStyleID.ThrownProjectile;
-			Projectile.timeLeft = 800;
+			Projectile.timeLeft = 300;
 		}
 
         public override void OnKill(int timeLeft)
 		{
 			Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height); //makes dust based on tile
-			SoundEngine.PlaySound(SoundID.NPCDeath1, Projectile.position); //plays impact sound
+			SoundEngine.PlaySound(SoundID.Coins, Projectile.position); //plays impact sound
 		}
-
-	}
+    }
 
 }

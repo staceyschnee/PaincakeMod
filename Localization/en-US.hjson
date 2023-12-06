@@ -131,6 +131,7 @@ Mods: {
 			Chicken.DisplayName: Chicken
 			Cow.DisplayName: Cow
 			JellyDonut.DisplayName: Jelly Donut
+			BostonCream.DisplayName: Boston Cream
 		}
 
 		Projectiles: {
@@ -139,6 +140,7 @@ Mods: {
 			CroissantProjectile.DisplayName: Croissant Projectile
 			BlueberryPaincakeProjectile.DisplayName: Blueberry Paincake Projectile
 			ChocolateChipPaincakeProjectile.DisplayName: Chocolate Chip Paincake Projectile
+			SprinkleProjectile.DisplayName: Sprinkle Projectile
 		}
 	}
 }
