@@ -64,9 +64,9 @@ namespace PaincakeMod.NPCs
             base.AI();
             NPC.TargetClosest(true);
             Player player = Main.player[NPC.target];
-            if (NPC.HasValidTarget)
+            if ((Main.netMode != NetmodeID.MultiplayerClient) && (NPC.HasValidTarget))
             {
-				if (Main.rand.NextBool(30) && !player.ZoneForest)
+				if (Main.rand.NextBool(160) && !player.ZoneForest)
 				{
 					if ((player.Center - NPC.Center).Length() < 800)
 					{
@@ -75,13 +75,13 @@ namespace PaincakeMod.NPCs
 						Vector2 targetPosition = Main.player[NPC.target].Center;
 						Vector2 direction = targetPosition - position;
 						direction.Normalize();
-						float speed = 13f;
-                        int damage = NPC.damage / 5 + 1; //If the projectile is hostile, the damage passed into NewProjectile will be applied doubled, and quadrupled if expert mode, so keep that in mind when balancing projectiles if you scale it off NPC.damage (which also increases for expert/master)
-						int sprinkleCount = Main.rand.Next(5, 10);
+						float speed = 10f;
+                        int sprinkleCount = Main.rand.Next(8, 16);
+                        int damage = NPC.damage / sprinkleCount + 1; //If the projectile is hostile, the damage passed into NewProjectile will be applied doubled, and quadrupled if expert mode, so keep that in mind when balancing projectiles if you scale it off NPC.damage (which also increases for expert/master)
 						for (int i = 0; i < sprinkleCount; i++)
 						{
 							int type = ModContent.ProjectileType<Projectiles.SprinkleProjectile>();
-							Vector2 newDirection = direction.RotateRandom(1.5f);
+							Vector2 newDirection = direction.RotateRandom(1.2f);
 							Projectile.NewProjectile(source, position, newDirection * speed, type, damage, 0f, Main.myPlayer);
 						}
 					}

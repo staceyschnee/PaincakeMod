@@ -125,6 +125,11 @@ Mods: {
 				DisplayName: Chocolate Chip Paincake
 				Tooltip: ""
 			}
+
+			CerealBox: {
+				DisplayName: Cereal Box
+				Tooltip: ""
+			}
 		}
 
 		NPCs: {
@@ -141,6 +146,7 @@ Mods: {
 			BlueberryPaincakeProjectile.DisplayName: Blueberry Paincake Projectile
 			ChocolateChipPaincakeProjectile.DisplayName: Chocolate Chip Paincake Projectile
 			SprinkleProjectile.DisplayName: Sprinkle Projectile
+			CerealProjectile.DisplayName: Cereal Projectile
 		}
 	}
 }

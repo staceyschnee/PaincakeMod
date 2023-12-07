@@ -10,23 +10,23 @@ using Terraria.ModLoader;
 
 namespace PaincakeMod.Projectiles
 {
-	public class SprinkleProjectile : ModProjectile
+	public class CerealProjectile : ModProjectile
 	{ 
 		public override void SetStaticDefaults()
 		{
-            Main.projFrames[Projectile.type] = 6;
+            Main.projFrames[Projectile.type] = 19;
         }
 
 		public override void SetDefaults()
 		{
 			//Projectile.CloneDefaults(ProjectileID.SpikedSlimeSpike);
-			Projectile.damage = 5;
-			Projectile.width = 4;
-			Projectile.height = 12;
-			Projectile.knockBack = 1f;
-			//Projectile.friendly = false;
-			Projectile.hostile = true;
-			Projectile.penetrate = 2;
+			Projectile.damage = 8;
+			Projectile.width = 10;
+			Projectile.height = 10;
+			Projectile.knockBack = 3f;
+			Projectile.friendly = true;
+			//Projectile.hostile = true;
+			Projectile.penetrate = 1;
 			Projectile.aiStyle = ProjAIStyleID.ThrownProjectile;
 			Projectile.timeLeft = 300;
 			Projectile.CritChance = 2;
@@ -42,15 +42,14 @@ namespace PaincakeMod.Projectiles
             base.AI();
 			if (Projectile.frameCounter++ == 0)
 			{
-				Projectile.frame = Main.rand.Next(0, 6);
-				Projectile.hostile = Main.rand.NextBool(2);
+				Projectile.frame = Main.rand.Next(0, 19);
 			}
         }
 
         public override void OnKill(int timeLeft)
 		{
 			Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height); //makes dust based on tile
-			SoundEngine.PlaySound(SoundID.Coins, Projectile.position); //plays impact sound
+			SoundEngine.PlaySound(SoundID.CoinPickup, Projectile.position); //plays impact sound
 		}
     }
 
