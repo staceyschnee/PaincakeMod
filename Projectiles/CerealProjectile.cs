@@ -14,7 +14,7 @@ namespace PaincakeMod.Projectiles
 	{ 
 		public override void SetStaticDefaults()
 		{
-            Main.projFrames[Projectile.type] = 19;
+            Main.projFrames[Projectile.type] = 20;
         }
 
 		public override void SetDefaults()
@@ -42,7 +42,7 @@ namespace PaincakeMod.Projectiles
             base.AI();
 			if (Projectile.frameCounter++ == 0)
 			{
-				Projectile.frame = Main.rand.Next(0, 19);
+				Projectile.frame = Main.rand.Next(0, 20);
 			}
         }
 
