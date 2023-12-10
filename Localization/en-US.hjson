@@ -130,6 +130,21 @@ Mods: {
 				DisplayName: Cereal Box
 				Tooltip: ""
 			}
+
+			CerealBar: {
+				DisplayName: Cereal Bar
+				Tooltip: ""
+			}
+
+			SapBucket: {
+				DisplayName: Sap Bucket
+				Tooltip: ""
+			}
+
+			TapBucket: {
+				DisplayName: Tap Bucket
+				Tooltip: ""
+			}
 		}
 
 		NPCs: {
