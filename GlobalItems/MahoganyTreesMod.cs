@@ -30,8 +30,33 @@ namespace PaincakeMod.Items
 {
     class MahagonyTreeMod : GlobalTile
     {
+        public override void Drop(int i, int j, int type)
+        {
+            base.Drop(i, j, type);
+            if (type == TileID.Trees)
+            {
+                for (int h = j + 1; h < j + 20; h++)
+                {
+                    // This should cause a 5% change to drop a cacoa pod when a player shakes or chops down a mahogany tree
+                    if (Main.tile[i, h].HasTile && Main.tile[i, h].TileType != TileID.Trees)
+                    {
+                        if (Main.tile[i, h].TileType == TileID.JungleGrass)
+                        {
+                            if (Main.rand.NextBool(20)) //1-in-20, or 5% chance
+                            {
+                                Item.NewItem(null, new Vector2(i * 16, j * 16), ModContent.ItemType<CacaoPod>());
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+  
+
         //This will cause trees to have a 5% chance of dropping gold ore
-        public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
+/*        public override void KillTile(int i, int j, int type, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
             if (type == TileID.Trees)
             {
@@ -51,6 +76,7 @@ namespace PaincakeMod.Items
                     }
                 }
             }
-        }
+        } 
+*/
     }
 }

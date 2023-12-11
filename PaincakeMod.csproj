@@ -9,7 +9,9 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Items\TapBucket.png" />
+    <None Remove="NPCs\CowRight.png" />
     <None Remove="Projectiles\CroissantProjectile.png" />
+    <None Remove="Tiles\CowPenTileNew.png" />
     <None Remove="Tiles\TapBucketTile.png" />
   </ItemGroup>
   <ItemGroup>

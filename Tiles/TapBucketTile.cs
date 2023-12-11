@@ -92,9 +92,8 @@ namespace PaincakeMod.Tiles
             Main.tileNoAttach[Type] = false;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
             TileObjectData.newTile.LavaDeath = false;
-            //TileObjectData.newTile.AnchorLeft = new AnchorData(AnchorType.SolidSide, 2, 1);
-            //TileObjectData.newTile.AnchorRight = new AnchorData(AnchorType.SolidSide, 2, 1);
-            //TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidWithTop, 2, 1);
+            TileObjectData.newTile.AnchorLeft = new AnchorData(AnchorType.Tree | AnchorType.SolidTile | AnchorType.SolidSide, 2, 0);
+            TileObjectData.newTile.AnchorRight = new AnchorData(AnchorType.Tree| AnchorType.SolidTile | AnchorType.SolidSide, 2, 0);
             //TileObjectData.newTile.DrawXOffset = -2;
             TileObjectData.addTile(Type);
             AddMapEntry(new Color(240, 240, 200), Language.GetText("MapObject.TapBucket"));
