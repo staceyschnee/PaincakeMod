@@ -24,8 +24,8 @@ namespace PaincakeMod.Items
 
 		public override void SetDefaults()
 		{
-			Item.width = 80;
-			Item.height = 60;
+			Item.width = 128;
+			Item.height = 32;
 			Item.value = 2243;
 			Item.useAnimation = 15;
 			Item.useTime = 10;

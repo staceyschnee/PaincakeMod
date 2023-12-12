@@ -92,8 +92,10 @@ namespace PaincakeMod.Tiles
             Main.tileNoAttach[Type] = false;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
             TileObjectData.newTile.LavaDeath = false;
-            TileObjectData.newTile.AnchorLeft = new AnchorData(AnchorType.Tree | AnchorType.SolidTile | AnchorType.SolidSide, 2, 0);
-            TileObjectData.newTile.AnchorRight = new AnchorData(AnchorType.Tree| AnchorType.SolidTile | AnchorType.SolidSide, 2, 0);
+            TileObjectData.newTile.AnchorLeft = new AnchorData(AnchorType.Tree, 2, 0);
+            TileObjectData.newTile.AnchorRight = new AnchorData(AnchorType.Tree, 2, 0);
+            TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidWithTop | AnchorType.SolidTile, 2, 0);
+            TileObjectData.newTile.UsesCustomCanPlace = true;
             //TileObjectData.newTile.DrawXOffset = -2;
             TileObjectData.addTile(Type);
             AddMapEntry(new Color(240, 240, 200), Language.GetText("MapObject.TapBucket"));
@@ -143,6 +145,42 @@ namespace PaincakeMod.Tiles
             }
         }
 
+        public override bool CanPlace(int i, int j)
+        {
+            bool treeFound = false;
+            int treeX = 0;
+            for (treeX = i - 2; treeX <= i + 4; treeX++)
+            {
+                Mod.Logger.InfoFormat("Find Tree tile {0}{1} is type {2}", treeX, j, Main.tile[treeX, j].TileType);
+                if (Main.tile[treeX, j].HasTile && Main.tile[treeX, j].TileType == TileID.Trees)
+                {
+                    break;
+                }
+            }
+            if (treeFound)
+            {
+                for (int h = j + 1; h < j + 20; h++)
+                {
+                    Mod.Logger.InfoFormat("Find Biome tile {0}{1} is type {2}", treeX, j, Main.tile[treeX, j].TileType);
+                    if (Main.tile[treeX, h].HasTile && Main.tile[treeX, h].TileType != TileID.Trees)
+                    {
+                        if (Main.tile[treeX, h].TileType == TileID.SnowBlock || Main.tile[treeX, h].TileType == TileID.Grass)
+                        {
+                            Mod.Logger.Info("Can Place Bucket");
+                            return true;
+                        }
+                        break;
+                    }
+                }
+            }
+            else 
+            { 
+                Mod.Logger.Info("Wrong Biome");
+            }
+            Mod.Logger.Info("No tree here or wrong biome");
+            return false;
+            //return base.CanPlace(i, j);
+        }
         public override bool RightClick(int i, int j)
         {
             if (BucketLocations.Count > 0)

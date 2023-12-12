@@ -145,6 +145,11 @@ Mods: {
 				DisplayName: Tap Bucket
 				Tooltip: ""
 			}
+
+			MapleBottle: {
+				DisplayName: Maple Bottle
+				Tooltip: ""
+			}
 		}
 
 		NPCs: {

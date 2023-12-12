@@ -65,8 +65,8 @@ namespace PaincakeMod.Tiles
 
 			public bool Equals(int X, int Y)
 			{
-				return (X - _X < 5 && X - _X >= -5 
-						&& Y - _Y < 4 && Y - _Y >= -4);
+				return (X - _X < 8 && X - _X >= -8 
+						&& Y - _Y < 2 && Y - _Y >= -2);
 			}
 
 			public long getmilk()
@@ -88,16 +88,16 @@ namespace PaincakeMod.Tiles
 		{
 			Main.tileFrameImportant[Type] = true;
 			Main.tileObsidianKill[Type] = true;
-			TileObjectData.newTile.CopyFrom(TileObjectData.Style5x4);
-            TileObjectData.newTile.Width = 5; 
+			TileObjectData.newTile.CopyFrom(TileObjectData.Style4x2);
+            TileObjectData.newTile.Width = 8; 
             //TileObjectData.newTile.Origin = new Point16(1, 2);
             TileObjectData.newTile.LavaDeath = false;
-			//TileObjectData.newTile.CoordinatePadding = 2;
-			TileObjectData.addTile(Type);
-			TileObjectData.newTile.DrawYOffset = 8;
+            TileObjectData.newTile.CoordinatePadding = 2;
+            //TileObjectData.newTile.DrawYOffset = -2;
+            TileObjectData.addTile(Type);
 			AddMapEntry(new Color(200, 200, 200), Language.GetText("MapObject.CowPen"));
 			//Can't use this since texture is vertical
-			AnimationFrameHeight = 72;
+			AnimationFrameHeight = 38;
 		}
 
 		public override void AnimateIndividualTile(int type, int i, int j, ref int frameXOffset, ref int frameYOffset) 
@@ -123,21 +123,18 @@ namespace PaincakeMod.Tiles
 
 		public override void AnimateTile(ref int frame, ref int frameCounter)
 		{
-			++frameCounter;
-			// Spend 9 ticks on each of 4 frames, looping
-			if (frameCounter == PaincakeConstants.milkProducedFrameCount - 60)
-			{ 
-				frame = ++frame % 2;
+            // Spend 20 ticks on each of 10 frames, looping
+            if (frameCounter++ % 20 == 0)
+			{
+				frame = ++frame % 10;
 			}
-			else if (frameCounter == PaincakeConstants.milkProducedFrameCount)
+			if (frameCounter == PaincakeConstants.milkProducedFrameCount)
 			{
 				foreach (Location pos in penLocations)
 				{
 					pos.addmilk();
 					Item.NewItem(new EntitySource_TileBreak(pos._X, pos._Y), pos._X * 16, pos._Y * 16, 20, 15, ItemID.MilkCarton, (int)pos.getmilk());
 				}
-				frameCounter = 0;
-				frame = ++frame % 2;
 			}
 		}
 
