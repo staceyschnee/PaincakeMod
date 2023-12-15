@@ -3,27 +3,27 @@ Mods: {
 		Items: {
 			ChickenCoup: {
 				DisplayName: Chicken Coup
-				Tooltip: ""
+				Tooltip: "Place this to get more eggs"
 			}
 
 			ChickenEgg: {
 				DisplayName: Chicken Egg
-				Tooltip: ""
+				Tooltip: "Throw it at your enemies or use it to make better ammunition"
 			}
 
 			Flour: {
 				DisplayName: Flour
-				Tooltip: ""
+				Tooltip: "Make ammunition with this"
 			}
 
 			Griddle: {
 				DisplayName: Griddle
-				Tooltip: ""
+				Tooltip: "Makes Paincakes"
 			}
 
 			GrindingMill: {
 				DisplayName: Grinding Mill
-				Tooltip: ""
+				Tooltip: "SPecial Crafting; Makes Flour"
 			}
 
 			SplatSword: {
@@ -33,7 +33,7 @@ Mods: {
 
 			WoodenSpoon: {
 				DisplayName: Wooden Spoon
-				Tooltip: ""
+				Tooltip: "Its a wooden spoon"
 			}
 
 			ChickenItem: {
@@ -48,12 +48,12 @@ Mods: {
 
 			Paincake: {
 				DisplayName: Paincake
-				Tooltip: ""
+				Tooltip: "Ammo"
 			}
 
 			IronSpatula: {
 				DisplayName: Iron Spatula
-				Tooltip: ""
+				Tooltip: "Flings Paincakes"
 			}
 
 			GoldSpatula: {
@@ -68,7 +68,7 @@ Mods: {
 
 			CowPen: {
 				DisplayName: Cow Pen
-				Tooltip: ""
+				Tooltip: "Place this to get more milk to make Paincakes"
 			}
 
 			CopperSpatula: {
@@ -118,17 +118,17 @@ Mods: {
 
 			CacaoPod: {
 				DisplayName: Cacao Pod
-				Tooltip: ""
+				Tooltip: "Makes Chocolate"
 			}
 
 			ChocolateChipPaincake: {
 				DisplayName: Chocolate Chip Paincake
-				Tooltip: ""
+				Tooltip: "Piercing Paincake"
 			}
 
 			CerealBox: {
 				DisplayName: Cereal Box
-				Tooltip: ""
+				Tooltip: "Flings cereal at your enemies"
 			}
 
 			CerealBar: {
@@ -138,22 +138,22 @@ Mods: {
 
 			SapBucket: {
 				DisplayName: Sap Bucket
-				Tooltip: ""
+				Tooltip: "Sap to make syrup"
 			}
 
 			TapBucket: {
 				DisplayName: Tap Bucket
-				Tooltip: ""
+				Tooltip: "Place on a Boreal wood tree to get Sap"
 			}
 
 			MapleBottle: {
 				DisplayName: Maple Bottle
-				Tooltip: ""
+				Tooltip: "Put syrup in here"
 			}
 
 			ExtraDarkMapleSyrup: {
 				DisplayName: Extra Dark Maple Syrup
-				Tooltip: ""
+				Tooltip: "5% increased Paincake Damage, 5% increased Critical Strike chance; 5 minute duration"
 			}
 		}
 
@@ -177,7 +177,7 @@ Mods: {
 		Buffs: {
 			ExtraDarkMapleBuff: {
 				DisplayName: Extra Dark Maple Buff
-				Description: Mods.PaincakeMod.Buffs.ExtraDarkMapleBuff.Description
+				Description: "5% Extra Paincake Damage, 5% increased Critical Strike chance; 5 minute duration"
 			}
 		}
 	}

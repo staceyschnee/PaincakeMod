@@ -11,6 +11,8 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
 using Terraria.GameContent.Creative;
 using PaincakeMod.Tiles;
+using Microsoft.Xna.Framework;
+
 
 namespace PaincakeMod.Items
 {
@@ -30,11 +32,31 @@ namespace PaincakeMod.Items
 			Item.useTime = 10;
 			Item.useStyle = ItemUseStyleID.HoldUp;
 			Item.rare = ItemRarityID.Orange;
-			Item.UseSound = SoundID.Item1;
-			Item.autoReuse = true;
+			Item.UseSound = SoundID.LiquidsHoneyWater;
+			Item.autoReuse = false;
 			Item.consumable = true;
-			Item.useTurn = true;
+			Item.useTurn = false;
 			Item.maxStack = 9999;
 		}
-	}
+
+        public override bool CanUseItem(Player player)
+        {
+            Point tileLocation = player.Center.ToTileCoordinates();
+			Point MouseWorldTile = Main.MouseWorld.ToTileCoordinates();
+
+			if (Main.tile[MouseWorldTile.X, MouseWorldTile.Y].TileType == TileID.CookingPots) 
+			{
+				// checked the state of the syrup pot (Working or Ready)
+				// if working return false;
+				// if ready,
+				// drop item
+				// start cooking
+				// return true;
+				return true;
+			}
+            // find one of the maple syrup making accessories
+            // once found, call that items start syrup produciton method.
+            return base.CanUseItem(player);
+        }
+    }
 }
