@@ -150,6 +150,11 @@ Mods: {
 				DisplayName: Maple Bottle
 				Tooltip: ""
 			}
+
+			ExtraDarkMapleSyrup: {
+				DisplayName: Extra Dark Maple Syrup
+				Tooltip: ""
+			}
 		}
 
 		NPCs: {
@@ -167,6 +172,13 @@ Mods: {
 			ChocolateChipPaincakeProjectile.DisplayName: Chocolate Chip Paincake Projectile
 			SprinkleProjectile.DisplayName: Sprinkle Projectile
 			CerealProjectile.DisplayName: Cereal Projectile
+		}
+
+		Buffs: {
+			ExtraDarkMapleBuff: {
+				DisplayName: Extra Dark Maple Buff
+				Description: Mods.PaincakeMod.Buffs.ExtraDarkMapleBuff.Description
+			}
 		}
 	}
 }
