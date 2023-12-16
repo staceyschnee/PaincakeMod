@@ -9,6 +9,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Buffs\BuffTemplate - Copy.png" />
+    <None Remove="Items\SyrupCookingPot.png" />
     <None Remove="Items\TapBucket.png" />
     <None Remove="NPCs\CowRight.png" />
     <None Remove="Projectiles\CroissantProjectile.png" />

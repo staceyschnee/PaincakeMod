@@ -35,4 +35,11 @@ namespace PaincakeMod.Constants
         public const long milkProducedFrameCount = 7200;
     }
 
+	public enum PaincakePotStatus
+	{
+		Empty = 0,
+		NeedsMore = 1,
+		Processing = 2,
+		Finished = 3
+	}
 }
