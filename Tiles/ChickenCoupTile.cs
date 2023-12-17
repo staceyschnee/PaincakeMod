@@ -138,7 +138,7 @@ namespace PaincakeMod.Tiles
 					{
 						for (int height = 0; height < Main.maxTilesY / 2; height++)
 						{
-							Tile tile = Main.tile[width, height];
+							Tile tile = Framing.GetTileSafely(width, height);
 							if (tile.TileType == Type)
 							{
 								bool found = false;

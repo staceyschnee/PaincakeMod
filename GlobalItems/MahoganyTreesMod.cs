@@ -38,9 +38,9 @@ namespace PaincakeMod.Items
                 for (int h = j + 1; h < j + 20; h++)
                 {
                     // This should cause a 5% change to drop a cacoa pod when a player shakes or chops down a mahogany tree
-                    if (Main.tile[i, h].HasTile && Main.tile[i, h].TileType != TileID.Trees)
+                    if (Framing.GetTileSafely(i, h).HasTile && Framing.GetTileSafely(i, h).TileType != TileID.Trees)
                     {
-                        if (Main.tile[i, h].TileType == TileID.JungleGrass)
+                        if (Framing.GetTileSafely(i, h).TileType == TileID.JungleGrass)
                         {
                             if (Main.rand.NextBool(20)) //1-in-20, or 5% chance
                             {
@@ -63,9 +63,9 @@ namespace PaincakeMod.Items
                 for (int h = j + 1; h < j + 20; h++)
                 {
                     //We MUST check for fail to be false, as KillTile is actually called every time a tile is hit by an axe/pickaxe.  We only want to give ore when the tile is mined.
-                    if (Main.tile[i, h].HasTile && Main.tile[i, h].TileType != TileID.Trees)
+                    if (Framing.GetTileSafely(i, h).HasTile && Framing.GetTileSafely(i, h).TileType != TileID.Trees)
                     {
-                        if (Main.tile[i, h].TileType == TileID.JungleGrass)
+                        if (Framing.GetTileSafely(i, h).TileType == TileID.JungleGrass)
                         {
                             if (Main.rand.NextBool(20)) //1-in-20, or 5% chance
                             {

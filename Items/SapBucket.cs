@@ -43,7 +43,7 @@ namespace PaincakeMod.Items
         public override bool ConsumeItem(Player player)
         {
             Point MouseWorldTile = Main.MouseWorld.ToTileCoordinates();
-            if (Main.tile[MouseWorldTile.X, MouseWorldTile.Y].TileType == ModContent.TileType<SyrupCookingPotTile>())
+            if (Framing.GetTileSafely(MouseWorldTile.X, MouseWorldTile.Y).TileType == ModContent.TileType<SyrupCookingPotTile>())
             {
                 return true;
             }
@@ -52,14 +52,13 @@ namespace PaincakeMod.Items
 
         public override void OnConsumeItem(Player player)
         {
-            Mod.Logger.Info("OnConsumeItem");
             base.OnConsumeItem(player);
         }
 
         public override bool? UseItem(Player player)
         {
             Point MouseWorldTile = Main.MouseWorld.ToTileCoordinates();
-            if (Main.tile[MouseWorldTile.X, MouseWorldTile.Y].TileType == ModContent.TileType<SyrupCookingPotTile>())
+            if (Framing.GetTileSafely(MouseWorldTile.X, MouseWorldTile.Y).TileType == ModContent.TileType<SyrupCookingPotTile>())
             {
                 return true;
             }
@@ -68,11 +67,10 @@ namespace PaincakeMod.Items
 
         public override bool CanUseItem(Player player)
         {
-            Point tileLocation = player.Center.ToTileCoordinates();
 			Point MouseWorldTile = Main.MouseWorld.ToTileCoordinates();
             // find one of the maple syrup making accessories
             // once found, call that items start syrup produciton method.
-            if (Main.tile[MouseWorldTile.X, MouseWorldTile.Y].TileType == ModContent.TileType<SyrupCookingPotTile>()) 
+            if (Framing.GetTileSafely(MouseWorldTile.X, MouseWorldTile.Y).TileType == ModContent.TileType<SyrupCookingPotTile>()) 
 			{
 				SyrupCookingPotTile SyrupPot =  ModContent.GetInstance<SyrupCookingPotTile>();
 

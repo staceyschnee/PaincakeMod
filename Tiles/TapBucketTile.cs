@@ -20,12 +20,18 @@ using Terraria.Localization;
 using PaincakeMod.Items;
 using PaincakeMod.Constants;
 using System.Net.Mail;
+using Terraria.GameContent.Metadata;
 
 
 namespace PaincakeMod.Tiles
 {
     class TapBucketTile : ModTile
     {
+        internal interface ILoadable
+        {
+            void Load();
+            void Unload();
+        }
         class Location : IEquatable<Location>
         {
             public int _X { get; set; }
@@ -38,7 +44,7 @@ namespace PaincakeMod.Tiles
                 _X = X;
                 _Y = Y;
                 _bucketCount = bucketCount;
-                _bucketProduced = bucketCount;
+                _bucketProduced = 0;
             }
             public override bool Equals(object obj)
             {
@@ -63,21 +69,25 @@ namespace PaincakeMod.Tiles
                         && Y - _Y < 1 && Y - _Y >= -1);
             }
 
-            public long getbuckets()
+            public long getBuckets()
             {
                 long count = _bucketCount - _bucketProduced;
                 _bucketProduced = _bucketCount;
                 return count;
             }
 
-            public long checkbuckets()
+            public long checkBuckets()
             {
                 long count = _bucketCount - _bucketProduced;
                 return count;
             }
-            public void addbuckets()
+            public void addBuckets(int days)
             {
-                _bucketCount++;
+                _bucketCount += days;
+            }
+            public void setBuckets(int days)
+            {
+                _bucketCount = days;
             }
         }
 
@@ -147,7 +157,7 @@ namespace PaincakeMod.Tiles
             // TODO: Also check to be sure taht the tree is more than 15 blocks tall and has a top
             if (alternate == 0)
             {
-                if (Main.tile[i + 1, j].HasTile && Main.tile[i + 1, j].TileType == TileID.Trees)
+                if (Framing.GetTileSafely(i + 1, j).HasTile && Framing.GetTileSafely(i + 1, j).TileType == TileID.Trees)
                 {
                     treeX = i + 1;
                     treeFound = true;
@@ -155,7 +165,7 @@ namespace PaincakeMod.Tiles
             }
             if (alternate == 1)
             {
-                if (Main.tile[i - 1, j].HasTile && Main.tile[i - 1, j].TileType == TileID.Trees)
+                if (Framing.GetTileSafely(i - 1, j).HasTile && Framing.GetTileSafely(i - 1, j).TileType == TileID.Trees)
                 {
                     treeX = i - 1;
                     treeFound = true;
@@ -165,10 +175,10 @@ namespace PaincakeMod.Tiles
             {
                 for (int h = j + 1; h < j + 20; h++)
                 {
-                    //Mod.Logger.InfoFormat("Find Biome tile {0},{1} is type {2}", treeX, h, Main.tile[treeX, h].TileType);
-                    if (Main.tile[treeX, h].HasTile && Main.tile[treeX, h].TileType != TileID.Trees)
+                    //Mod.Logger.InfoFormat("Find Biome tile {0},{1} is type {2}", treeX, h, Framing.GetTileSafely(treeX, h).TileType);
+                    if (Framing.GetTileSafely(treeX, h).HasTile && Framing.GetTileSafely(treeX, h).TileType != TileID.Trees)
                     {
-                        if (Main.tile[treeX, h].TileType == TileID.SnowBlock)
+                        if (Framing.GetTileSafely(treeX, h).TileType == TileID.SnowBlock)
                         {
                             if (Math.Abs(j - h) < 2)
                             {
@@ -189,10 +199,49 @@ namespace PaincakeMod.Tiles
             return 1;
         }
 
+        bool oldIsDay = true;
+        int dayCount = 0;
+
+        public void UpdateTimeDayInfo()
+        {
+            if (Main.dayTime != oldIsDay) 
+            {
+                if (Main.dayTime == true && oldIsDay == false)
+                {
+                    dayCount++;
+                    UpdateAllBucketsNewDay();
+                }
+                oldIsDay = Main.dayTime;
+            }
+        }
+
+        public bool UpdateAllBucketsNewDay()
+        {
+            if (BucketLocations.Count > 0)
+            {
+                foreach (Location loc in BucketLocations)
+                {
+                    if (loc.checkBuckets() == 0)
+                    {
+                        loc.setBuckets(dayCount);
+                    }
+                }
+            }
+            return true;
+        }
+
 
         public override void AnimateIndividualTile(int type, int i, int j, ref int frameXOffset, ref int frameYOffset)
         {
             bool found = false;
+            if (Main.dayTime == true && oldIsDay == false) // || (Main.time < 5 && Main.time > 0 && Main.time < oldTimeTicks)))
+            {
+                dayCount++;
+//                Mod.Logger.InfoFormat("animate add DayCount {0} oldisDay {1} oldtimeticks {2}", dayCount, oldIsDay, oldTimeTicks);
+                UpdateAllBucketsNewDay();
+            }
+            oldIsDay = Main.dayTime;
+
             if (BucketLocations.Count > 0)
             {
                 foreach (Location loc in BucketLocations)
@@ -200,26 +249,17 @@ namespace PaincakeMod.Tiles
                     if (loc.Equals(i, j))
                     {
                         found = true;
-                        if (Main.dayTime == true && Main.time < 5)
+                        loc.setBuckets(dayCount);
+                        //Mod.Logger.InfoFormat("animate set bucket {0},{1} to {2}", i, j, dayCount);
+
+                        if (loc.checkBuckets() == 0)
                         {
-                            // add a sap bucket and change to filled
-                            if (loc.checkbuckets() == 0)
-                            {
-                                loc.addbuckets();
-                            }
-                            frameYOffset = 18;
+                            // Set bucket back to looking empty
+                            frameYOffset = 0;
                         }
                         else
                         {
-                            if (loc.checkbuckets() == 0)
-                            {
-                                // Set bucket back to looking empty
-                                frameYOffset = 0;
-                            }
-                            else
-                            {
-                                frameYOffset = 18;
-                            }
+                            frameYOffset = 18;
                         }
                         break;
                     }
@@ -227,7 +267,13 @@ namespace PaincakeMod.Tiles
             }
             if (!found)
             {
-                BucketLocations.Add(new Location(i, j, 0));
+                //Mod.Logger.InfoFormat("animate adding bucket {0},{1} to {2}", i, j, dayCount);
+                int bucketsToAdd = (dayCount > 0) ? 1 : 0;
+                BucketLocations.Add(new Location(i, j, dayCount));
+                if (bucketsToAdd > 0)
+                {
+                    frameYOffset = 18;
+                }
             }
         }
 
@@ -235,40 +281,8 @@ namespace PaincakeMod.Tiles
         {
             // This is moved to GlobalTile because of a bug in tModLoader
             Mod.Logger.InfoFormat("Can Place {0},{1}", i, j);
-            return true;
-            bool treeFound = false;
-            int treeX = 0;
-            for (treeX = i - 2; treeX <= i + 4; treeX++)
-            {
-                Mod.Logger.InfoFormat("Find Tree tile {0}{1} is type {2}", treeX, j, Main.tile[treeX, j].TileType);
-                if (Main.tile[treeX, j].HasTile && Main.tile[treeX, j].TileType == TileID.Trees)
-                {
-                    break;
-                }
-            }
-            if (treeFound)
-            {
-                for (int h = j + 1; h < j + 20; h++)
-                {
-                    Mod.Logger.InfoFormat("Find Biome tile {0}{1} is type {2}", treeX, j, Main.tile[treeX, j].TileType);
-                    if (Main.tile[treeX, h].HasTile && Main.tile[treeX, h].TileType != TileID.Trees)
-                    {
-                        if (Main.tile[treeX, h].TileType == TileID.SnowBlock || Main.tile[treeX, h].TileType == TileID.Grass)
-                        {
-                            Mod.Logger.Info("Can Place Bucket");
-                            return true;
-                        }
-                        break;
-                    }
-                }
-            }
-            else 
-            { 
-                Mod.Logger.Info("Wrong Biome");
-            }
-            Mod.Logger.Info("No tree here or wrong biome");
-            return false;
-            //return base.CanPlace(i, j);
+            //return true;
+            return base.CanPlace(i, j);
         }
         public override bool RightClick(int i, int j)
         {
@@ -278,9 +292,9 @@ namespace PaincakeMod.Tiles
                 {
                     if (loc.Equals(i, j))
                     {
-                        if (loc.checkbuckets() > 0)
+                        if (loc.checkBuckets() > 0)
                         {
-                            loc.getbuckets();
+                            loc.getBuckets();
                             Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 24, 32, ModContent.ItemType<SapBucket>(), 1);
                         }
                         break;
@@ -298,18 +312,23 @@ namespace PaincakeMod.Tiles
 
         public override void SetSpriteEffects(int i, int j, ref SpriteEffects effects)
         {
-            if (Main.tile[i - 1, j].TileType == 5)
+            if (Framing.GetTileSafely(i - 1, j).TileType == 5)
             {
                 effects = SpriteEffects.FlipHorizontally;
             }
         }
-
 
         public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
             Location loc = new Location(i, j, 0);
             BucketLocations.Remove(loc);
             base.KillTile(i, j, ref fail, ref effectOnly, ref noItem);
+        }
+
+        public override void Unload()
+        {
+            BucketLocations.Clear();
+            base.Unload();
         }
 
     }

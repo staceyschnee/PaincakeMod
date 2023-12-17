@@ -30,6 +30,20 @@ namespace PaincakeMod.Items
 {
     class TabBucketGlobalPlace : GlobalTile
     {
- 
+        bool oldIsDay = false;
+        public override void AnimateTile()
+        {
+            bool isDay = Main.dayTime;
+            if (isDay != oldIsDay)
+            {
+                TapBucketTile tapBucket = ModContent.GetInstance<TapBucketTile>();
+                if (tapBucket != null)
+                {
+                    tapBucket.UpdateTimeDayInfo();
+                }
+                oldIsDay = isDay;
+            }
+            base.AnimateTile();
+        }
     }
 }

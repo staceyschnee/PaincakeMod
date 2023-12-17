@@ -24,11 +24,16 @@ using Microsoft.Xna.Framework.Input;
 
 namespace PaincakeMod.Tiles
 {
-	class SyrupCookingPotTile : ModTile
-	{
-        static int WorkingAnimationFrames = 28;
-        static int ExtraDarkSyrupCookingTicks = 60 * 60; // 4 game hours
-        static int TicksPerAnimationFrame = ExtraDarkSyrupCookingTicks / WorkingAnimationFrames;
+    class SyrupCookingPotTile : ModTile
+    {
+        const int SyrupCookingPotFrameCount = 120;
+        const int SyrupCookingPotEmptyFrame = 0;
+        const int SyrupCookingPotFinishedFrame = SyrupCookingPotFrameCount - 1;
+        const int SyrupStylesPerFrame = 3;
+        const int WorkingAnimationFrames = (SyrupCookingPotFinishedFrame - 2) / SyrupStylesPerFrame;
+        const int ExtraDarkSyrupCookingTicks = 60 * 60; // 1 game hour; 1 minute real time
+        const int TicksPerAnimationFrame = ExtraDarkSyrupCookingTicks / WorkingAnimationFrames;
+
         class Location : IEquatable<Location>
         {
             public int _X { get; set; }
@@ -62,7 +67,7 @@ namespace PaincakeMod.Tiles
 
             public bool Equals(int X, int Y)
             {
-                return (X - _X < 1 && X - _X >= -1
+                return (X - _X < 2 && X - _X >= -2
                         && Y - _Y < 2 && Y - _Y >= -2);
             }
 
@@ -81,27 +86,26 @@ namespace PaincakeMod.Tiles
 
         List<Location> PotLocations = new List<Location>();
 
-        const int SyrupCookingPotFrameCount = 30;
-		public override void SetStaticDefaults()
-		{
-			Main.tileFrameImportant[Type] = true;
-			Main.tileObsidianKill[Type] = true;
-			TileObjectData.newTile.CopyFrom(TileObjectData.Style1x2);
-			//TileObjectData.newTile.Origin = new Point16(0, 1);
-			TileObjectData.newTile.LavaDeath = false;
-			TileObjectData.newTile.DrawYOffset = 2;
-			TileObjectData.newTile.CoordinateHeights = new int[] { 16, 18 };
-			TileObjectData.newTile.CoordinateWidth = 18;
+        public override void SetStaticDefaults()
+        {
+            Main.tileFrameImportant[Type] = true;
+            Main.tileObsidianKill[Type] = true;
+            TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
+            //TileObjectData.newTile.Origin = new Point16(0, 1);
+            TileObjectData.newTile.LavaDeath = false;
+            TileObjectData.newTile.DrawYOffset = 2;
+            TileObjectData.newTile.CoordinateHeights = new int[] { 16, 18 };
+            TileObjectData.newTile.CoordinateWidth = 16;
             TileObjectData.newTile.CoordinatePadding = 2;
-			TileObjectData.newTile.StyleHorizontal = true;
-			TileObjectData.newTile.StyleWrapLimit = 10;
+            TileObjectData.newTile.StyleHorizontal = true;
+            TileObjectData.newTile.StyleWrapLimit = 12;
             TileObjectData.addTile(Type);
 
             AddMapEntry(new Color(200, 200, 200), Language.GetText("MapObject.SyrupCookingPot"));
-			 
-			//Can't use this since texture is vertical
-			AnimationFrameHeight = 38;
-		}
+
+            //Can't use this since texture is vertical
+            AnimationFrameHeight = 38;
+        }
 
         static int frameCounter = 0;
 
@@ -156,6 +160,27 @@ namespace PaincakeMod.Tiles
             return true;
         }
 
+        public bool CollectSyrup(int i, int j)
+        {
+            if (PotLocations.Count > 0)
+            {
+                foreach (Location loc in PotLocations)
+                {
+                    if (loc.Equals(i, j))
+                    {
+                        if (loc.getSyrupTicksLeft() <= 0)
+                        {
+                            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 42, 48, ModContent.ItemType<ExtraDarkMapleSyrup>(), 1);
+                            PotLocations.Remove(new Location(i, j, 0));
+                            return true;
+                        }
+                        break;
+                    }
+                }
+            }
+            return false;
+        }
+
         public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)
         {
             return true;
@@ -186,30 +211,36 @@ namespace PaincakeMod.Tiles
             }
         }
 
-        int OldTileNumber = -1;
+        int frameCount = 0;
+
         public override void AnimateIndividualTile(int type, int i, int j, ref int frameXOffset, ref int frameYOffset)
         {
-            int TileNumber = 0;
+            // TODO: Add dust to animation
+            // TODO: add light to fire
+
+            int TileNumber = SyrupCookingPotFinishedFrame;
 
             switch (GetPotStatusAtLocation(i, j))
             {
                 case PaincakePotStatus.Empty:
-                    TileNumber = 0;
+                    TileNumber = SyrupCookingPotEmptyFrame;
                     break;
                 case PaincakePotStatus.Processing:
-                    TileNumber = WorkingAnimationFrames - (GetPotTicksLeftAtLocation(i, j) / TicksPerAnimationFrame) + 1;
-                    TileNumber = Math.Min(TileNumber, WorkingAnimationFrames);
+                    frameCount++;
+                    int StyleNumber = WorkingAnimationFrames - (int) (GetPotTicksLeftAtLocation(i, j) / TicksPerAnimationFrame);
+                    TileNumber = (StyleNumber * SyrupStylesPerFrame) + ((frameCount / 8) % SyrupStylesPerFrame) + 1;
+                    TileNumber = Math.Min(TileNumber, SyrupCookingPotFinishedFrame - 1);
                     break;
                 case PaincakePotStatus.Finished:
-                    TileNumber = 29;
+                    TileNumber = SyrupCookingPotFinishedFrame;
                     break;
                 default:
-                    TileNumber = 0; 
+                    TileNumber = SyrupCookingPotFinishedFrame; 
                     break;
             }
 
-			frameXOffset = (TileNumber % 10) * 18;
-			frameYOffset = (TileNumber / 10) * 38;
+			frameXOffset = (TileNumber % 12) * 36;
+			frameYOffset = (TileNumber / 12) * 38;
 
             //base.AnimateIndividualTile(type, i, j, ref frameXOffset, ref frameYOffset);
         }
