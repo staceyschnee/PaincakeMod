@@ -138,7 +138,7 @@ Mods: {
 
 			SapBucket: {
 				DisplayName: Sap Bucket
-				Tooltip: Sap to make syrup
+				Tooltip: Sap to make maple syrup
 			}
 
 			TapBucket: {
@@ -153,12 +153,62 @@ Mods: {
 
 			ExtraDarkMapleSyrup: {
 				DisplayName: Extra Dark Maple Syrup
-				Tooltip: 5% increased Paincake Damage, 5% increased Critical Strike chance; 5 minute duration
+				Tooltip:
+					'''
+					5% increased Paincake Damage
+					   5% increased Critical Strike chance
+					5 minute duration
+					'''
 			}
 
 			TurkeyFryer: {
+				DisplayName: Turkey Fryer
+				Tooltip:
+					'''
+					Makes Dark Maple Syrup
+					   Place 2 SapBuckets in to start cooking
+					When finished, Use 2 Maple Bottle to get the finished syrup
+					'''
+			}
+
+			AmberMapleSyrup: {
+				DisplayName: Amber Maple Syrup
+				Tooltip:
+					'''
+					15% increased Paincake Damage
+					   15% increased Critical Strike chance
+					5 minute duration
+					'''
+			}
+
+			DarkMapleSyrup: {
+				DisplayName: Dark Maple Syrup
+				Tooltip:
+					'''
+					10% increased Paincake Damage
+					   10% increased Critical Strike chance
+					5 minute duration
+					'''
+			}
+
+			GoldenMapleSyrup: {
+				DisplayName: Golden Maple Syrup
+				Tooltip:
+					'''
+					20% increased Paincake Damage
+					   20% increased Critical Strike chance
+					5 minute duration
+					'''
+			}
+
+			SyrupCookingPot: {
 				DisplayName: Syrup Cooking Pot
-				Tooltip: ""
+				Tooltip:
+					'''
+					Makes Extra Dark Maple Syrup
+					   Place 1 SapBuckets in to start cooking
+					When finished, Use a Maple Bottle to get the finished syrup
+					'''
 			}
 		}
 
@@ -182,7 +232,42 @@ Mods: {
 		Buffs: {
 			ExtraDarkMapleBuff: {
 				DisplayName: Extra Dark Maple Buff
-				Description: 5% Extra Paincake Damage, 5% increased Critical Strike chance; 5 minute duration
+				Description:
+					'''
+					5% Extra Paincake Damage
+					   5% increased Critical Strike chance
+					5 minute duration
+					'''
+			}
+
+			AmberMapleBuff: {
+				DisplayName: Amber Maple Buff
+				Description:
+					'''
+					15% Extra Paincake Damage
+					   15% increased Critical Strike chance
+					5 minute duration
+					'''
+			}
+
+			DarkMapleBuff: {
+				DisplayName: Dark Maple Buff
+				Description:
+					'''
+					10% Extra Paincake Damage
+					   10% increased Critical Strike chance
+					5 minute duration
+					'''
+			}
+
+			GoldenMapleBuff: {
+				DisplayName: Golden Maple Buff
+				Description:
+					'''
+					20% Extra Paincake Damage
+					   20% increased Critical Strike chance
+					5 minute duration
+					'''
 			}
 		}
 	}

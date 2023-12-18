@@ -30,11 +30,11 @@ namespace PaincakeMod.Tiles
 {
     class SyrupCookingPotTile : ModTile
     {
-        const int SyrupCookingPotFrameCount = 120;
+        const int SyrupCookingPotFrameCount = 78;
         const int SyrupCookingPotEmptyFrame = 0;
         const int SyrupCookingPotFinishedFrame = SyrupCookingPotFrameCount - 1;
-        const int SyrupStylesPerFrame = 3;
-        const int WorkingAnimationFrames = (SyrupCookingPotFinishedFrame - 2) / SyrupStylesPerFrame;
+        const int SyrupStylesPerFrame = 2;
+        const int WorkingAnimationFrames = (SyrupCookingPotFinishedFrame - 1) / SyrupStylesPerFrame;
         const int ExtraDarkSyrupCookingTicks = 60 * 60; // 1 game hour; 1 minute real time
         const int TicksPerAnimationFrame = ExtraDarkSyrupCookingTicks / WorkingAnimationFrames;
 
@@ -107,7 +107,7 @@ namespace PaincakeMod.Tiles
             TileObjectData.newTile.CoordinateWidth = 16;
             TileObjectData.newTile.CoordinatePadding = 2;
             TileObjectData.newTile.StyleHorizontal = true;
-            TileObjectData.newTile.StyleWrapLimit = 12;
+            TileObjectData.newTile.StyleWrapLimit = 10;
             TileObjectData.addTile(Type);
 
             AddMapEntry(new Color(200, 200, 200), Language.GetText("MapObject.SyrupCookingPot"));
@@ -256,8 +256,8 @@ namespace PaincakeMod.Tiles
                     break;
             }
 
-			frameXOffset = (TileNumber % 12) * 36;
-			frameYOffset = (TileNumber / 12) * 38;
+			frameXOffset = (TileNumber % 10) * 36;
+			frameYOffset = (TileNumber / 10) * 38;
 
             //base.AnimateIndividualTile(type, i, j, ref frameXOffset, ref frameYOffset);
         }
@@ -280,7 +280,7 @@ namespace PaincakeMod.Tiles
                     Dust dust = Dust.NewDustDirect(new Vector2(i * 16 + 2, j * 16 - 4), 4, 8, DustID.Cloud, 0f, 0f, 100);
 
                     dust.position.X += Main.rand.Next(-4, 4);
-                    dust.position.Y += Main.rand.Next(2, 10);
+                    dust.position.Y += Main.rand.Next(4, 12);
                     dust.alpha += Main.rand.Next(100);
                     dust.velocity *= 0.2f;
                     dust.velocity.Y -= 0.5f + Main.rand.Next(10) * 0.1f;

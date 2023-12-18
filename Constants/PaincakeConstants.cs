@@ -40,6 +40,7 @@ namespace PaincakeMod.Constants
 		Empty = 0,
 		NeedsMore = 1,
 		Processing = 2,
-		Finished = 3
+		Finished = 3,
+		CollectMore = 4
 	}
 }

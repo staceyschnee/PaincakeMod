@@ -47,6 +47,10 @@ namespace PaincakeMod.Items
             {
                 return true;
             }
+            if (Framing.GetTileSafely(MouseWorldTile.X, MouseWorldTile.Y).TileType == ModContent.TileType<TurkeyFryerTile>())
+            {
+                return true;
+            }
             return false;
         }
 
@@ -59,6 +63,10 @@ namespace PaincakeMod.Items
         {
             Point MouseWorldTile = Main.MouseWorld.ToTileCoordinates();
             if (Framing.GetTileSafely(MouseWorldTile.X, MouseWorldTile.Y).TileType == ModContent.TileType<SyrupCookingPotTile>())
+            {
+                return true;
+            }
+            if (Framing.GetTileSafely(MouseWorldTile.X, MouseWorldTile.Y).TileType == ModContent.TileType<TurkeyFryerTile>())
             {
                 return true;
             }
@@ -89,6 +97,25 @@ namespace PaincakeMod.Items
                 }
                 return false;
 			}
+            if (Framing.GetTileSafely(MouseWorldTile.X, MouseWorldTile.Y).TileType == ModContent.TileType<TurkeyFryerTile>())
+            {
+                TurkeyFryerTile TurkeyFryer = ModContent.GetInstance<TurkeyFryerTile>();
+                Mod.Logger.Info("turkeyfryertyle");
+                PaincakePotStatus Status = TurkeyFryer.GetPotStatusAtLocation(MouseWorldTile.X, MouseWorldTile.Y);
+                // checked the state of the syrup pot (Working or Ready)
+                // if working return false;
+                if (Status != PaincakePotStatus.Empty && Status != PaincakePotStatus.NeedsMore)
+                {
+                    return false;
+                }
+                bool didStart = TurkeyFryer.StartWorking(MouseWorldTile.X, MouseWorldTile.Y);
+
+                if (didStart)
+                {
+                    return true;
+                }
+                return false;
+            }
             return false;
         }
     }

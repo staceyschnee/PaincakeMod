@@ -9,7 +9,7 @@ using Terraria.Localization;
 
 namespace PaincakeMod.Buffs
 {
-    public class GoldenkMapleBuff : ModBuff
+    public class GoldenMapleBuff : ModBuff
     {
         public static readonly float GoldenDamageBouns = 20;
         public static readonly int GoldenCritBouns = 20;

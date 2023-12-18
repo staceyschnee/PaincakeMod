@@ -37,6 +37,7 @@ namespace PaincakeMod.Tiles
         const int WorkingAnimationFrames = (TurkeyFryerFinishedFrame - 2) / SyrupStylesPerFrame;
         const int DarkSyrupCookingTicks = 60 * 60; // 1 game hour; 1 minute real time
         const int TicksPerAnimationFrame = DarkSyrupCookingTicks / WorkingAnimationFrames;
+        const int TurkeyFryerBucketsRequired = 2;
 
         class Location : IEquatable<Location>
         {
@@ -44,13 +45,17 @@ namespace PaincakeMod.Tiles
             public int _Y { get; set; }
             public long _syrupFinishedTicks { get; set; }
             public long _syrupElapsedTicks { get; set; }
+            public int _bucketsPlaced { get; set; }
+            public int _syrupRemoved { get; set; }
 
-            public Location(int X, int Y, long syrupFinishedTicks)
+
+            public Location(int X, int Y, int bucketsPlaced, long syrupFinishedTicks)
             {
                 _X = X;
                 _Y = Y;
                 _syrupFinishedTicks = Main.GameUpdateCount + syrupFinishedTicks;
                 _syrupElapsedTicks = Main.GameUpdateCount;
+                _bucketsPlaced = bucketsPlaced;
             }
             public override bool Equals(object obj)
             {
@@ -73,6 +78,39 @@ namespace PaincakeMod.Tiles
             {
                 return (X - _X < 2 && X - _X >= -2
                         && Y - _Y < 2 && Y - _Y >= -2);
+            }
+
+            public int getBucketsNeeded()
+            {
+                return TurkeyFryerBucketsRequired - _bucketsPlaced;
+            }
+
+            public void addBucketToPot()
+            {
+                if (getBucketsNeeded() > 0)
+                    _bucketsPlaced++;
+            }
+
+            public int getSyrupFromPot()
+            {
+                if (getNumSyrupLeftInPot() > 0)
+                {
+                    _syrupRemoved++;
+                    return 1;
+                }
+                return 0;
+            }
+
+            public int getNumSyrupLeftInPot()
+            {
+                if (getSyrupTicksLeft() > 0 || getBucketsNeeded() > 0)
+                {
+                    return -1;
+                }
+                else
+                {
+                    return TurkeyFryerBucketsRequired - _syrupRemoved;
+                }
             }
 
             public long getSyrupTicksLeft()
@@ -120,7 +158,6 @@ namespace PaincakeMod.Tiles
             if (!Main.dedServ)
             {
                 flameTexture = ModContent.Request<Texture2D>(Texture + "_Flame");
-
             }
         }
 
@@ -134,11 +171,22 @@ namespace PaincakeMod.Tiles
                 {
                     if (loc.Equals(i, j))
                     {
+                        if (loc.getBucketsNeeded() > 0)
+                        {
+                            return PaincakePotStatus.NeedsMore;
+                        }
                         if (loc.getSyrupTicksLeft() > 0)
                         {
                             return PaincakePotStatus.Processing;
                         }
-                        return PaincakePotStatus.Finished;
+                        if (loc.getNumSyrupLeftInPot() == TurkeyFryerBucketsRequired)
+                        {
+                            return PaincakePotStatus.Finished;
+                        }
+                        else if (loc.getNumSyrupLeftInPot() > 0)
+                        {
+                            return PaincakePotStatus.CollectMore;
+                        }
                     }
                 }
             }
@@ -161,7 +209,7 @@ namespace PaincakeMod.Tiles
         }
 
 
-        public bool StartPotWorking(int i, int j)
+        public bool StartWorking(int i, int j)
         {
             if (PotLocations.Count > 0)
             {
@@ -169,11 +217,16 @@ namespace PaincakeMod.Tiles
                 {
                     if (loc.Equals(i, j))
                     {
+                        if (loc.getBucketsNeeded() > 0)
+                        {
+                            loc.addBucketToPot();
+                            return true;
+                        }
                         return false;
                     }
                 }
             }
-            PotLocations.Add(new Location(i, j, DarkSyrupCookingTicks));
+            PotLocations.Add(new Location(i, j, 1, DarkSyrupCookingTicks));
             return true;
         }
 
@@ -187,8 +240,19 @@ namespace PaincakeMod.Tiles
                     {
                         if (loc.getSyrupTicksLeft() <= 0)
                         {
-                            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 42, 48, ModContent.ItemType<DarkMapleSyrup>(), 1);
-                            PotLocations.Remove(new Location(i, j, 0));
+                            int count = loc.getSyrupFromPot();
+                            Mod.Logger.InfoFormat("count left in pot {0}", count);
+                            if (count > 0)
+                            {
+                                Mod.Logger.Info("created DarkSyrup");
+                                Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 42, 48, ModContent.ItemType<DarkMapleSyrup>(), 1);
+                            }
+                            if (loc.getNumSyrupLeftInPot() <= 0)
+                            {
+                                Mod.Logger.Info("removing pot location");
+                                PotLocations.Remove(new Location(i, j, 0, 0));
+                            }
+
                             return true;
                         }
                         break;
@@ -223,7 +287,7 @@ namespace PaincakeMod.Tiles
             }
             else
             {
-                StartPotWorking(i, j);
+                StartWorking(i, j);
                 return true;
             }
         }
@@ -240,6 +304,7 @@ namespace PaincakeMod.Tiles
             switch (GetPotStatusAtLocation(i, j))
             {
                 case PaincakePotStatus.Empty:
+                case PaincakePotStatus.NeedsMore:
                     TileNumber = TurkeyFryerEmptyFrame;
                     break;
                 case PaincakePotStatus.Processing:
@@ -249,10 +314,11 @@ namespace PaincakeMod.Tiles
                     TileNumber = Math.Min(TileNumber, TurkeyFryerFinishedFrame - 1);
                     break;
                 case PaincakePotStatus.Finished:
+                case PaincakePotStatus.CollectMore:
                     TileNumber = TurkeyFryerFinishedFrame;
                     break;
                 default:
-                    TileNumber = TurkeyFryerFinishedFrame; 
+                    TileNumber = TurkeyFryerEmptyFrame; 
                     break;
             }
 
@@ -273,14 +339,14 @@ namespace PaincakeMod.Tiles
             if (!Lighting.UpdateEveryFrame || new FastRandom(Main.TileFrameSeed).WithModifier(i, j).Next(4) == 0)
             {
                 Tile tile = Main.tile[i, j];
-                int dustChance = (PotStatus == PaincakePotStatus.Processing) ? 2: 5;
+                int dustChance = (PotStatus == PaincakePotStatus.Processing) ? 1: 5;
                 // Only emit dust from the top tiles, and only if toggled on. This logic limits dust spawning under different conditions.
                 if (tile.TileFrameY == 0 && Main.rand.NextBool(dustChance) && ((Main.drawToScreen && Main.rand.NextBool(dustChance + 1)) || !Main.drawToScreen))
                 {
                     Dust dust = Dust.NewDustDirect(new Vector2(i * 16 + 2, j * 16 - 4), 4, 8, DustID.Cloud, 0f, 0f, 100);
 
                     dust.position.X += Main.rand.Next(-4, 4);
-                    dust.position.Y += Main.rand.Next(2, 10);
+                    dust.position.Y += Main.rand.Next(-3, 6);
                     dust.alpha += Main.rand.Next(100);
                     dust.velocity *= 0.2f;
                     dust.velocity.Y -= 0.5f + Main.rand.Next(10) * 0.1f;
@@ -335,7 +401,7 @@ namespace PaincakeMod.Tiles
 
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Location loc = new Location(i, j, 0);
+            Location loc = new Location(i, j, 0, 0);
             PotLocations.Remove(loc);
             base.KillMultiTile(i, j, frameX, frameY);
         }
