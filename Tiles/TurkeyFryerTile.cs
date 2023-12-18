@@ -28,15 +28,15 @@ using Terraria.Utilities;
 
 namespace PaincakeMod.Tiles
 {
-    class SyrupCookingPotTile : ModTile
+    class TurkeyFryerTile : ModTile
     {
-        const int SyrupCookingPotFrameCount = 120;
-        const int SyrupCookingPotEmptyFrame = 0;
-        const int SyrupCookingPotFinishedFrame = SyrupCookingPotFrameCount - 1;
+        const int TurkeyFryerFrameCount = 120;
+        const int TurkeyFryerEmptyFrame = 0;
+        const int TurkeyFryerFinishedFrame = TurkeyFryerFrameCount - 1;
         const int SyrupStylesPerFrame = 3;
-        const int WorkingAnimationFrames = (SyrupCookingPotFinishedFrame - 2) / SyrupStylesPerFrame;
-        const int ExtraDarkSyrupCookingTicks = 60 * 60; // 1 game hour; 1 minute real time
-        const int TicksPerAnimationFrame = ExtraDarkSyrupCookingTicks / WorkingAnimationFrames;
+        const int WorkingAnimationFrames = (TurkeyFryerFinishedFrame - 2) / SyrupStylesPerFrame;
+        const int DarkSyrupCookingTicks = 60 * 60; // 1 game hour; 1 minute real time
+        const int TicksPerAnimationFrame = DarkSyrupCookingTicks / WorkingAnimationFrames;
 
         class Location : IEquatable<Location>
         {
@@ -110,7 +110,7 @@ namespace PaincakeMod.Tiles
             TileObjectData.newTile.StyleWrapLimit = 12;
             TileObjectData.addTile(Type);
 
-            AddMapEntry(new Color(200, 200, 200), Language.GetText("MapObject.SyrupCookingPot"));
+            AddMapEntry(new Color(200, 200, 200), Language.GetText("MapObject.TurkeyFryer"));
 
             //Can't use this since texture is vertical
             DustType = -1;
@@ -173,7 +173,7 @@ namespace PaincakeMod.Tiles
                     }
                 }
             }
-            PotLocations.Add(new Location(i, j, ExtraDarkSyrupCookingTicks));
+            PotLocations.Add(new Location(i, j, DarkSyrupCookingTicks));
             return true;
         }
 
@@ -187,7 +187,7 @@ namespace PaincakeMod.Tiles
                     {
                         if (loc.getSyrupTicksLeft() <= 0)
                         {
-                            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 42, 48, ModContent.ItemType<ExtraDarkMapleSyrup>(), 1);
+                            Item.NewItem(new EntitySource_TileBreak(i, j), i * 16, j * 16, 42, 48, ModContent.ItemType<DarkMapleSyrup>(), 1);
                             PotLocations.Remove(new Location(i, j, 0));
                             return true;
                         }
@@ -235,24 +235,24 @@ namespace PaincakeMod.Tiles
             // TODO: Add dust to animation
             // TODO: add light to fire
 
-            int TileNumber = SyrupCookingPotFinishedFrame;
+            int TileNumber = TurkeyFryerFinishedFrame;
 
             switch (GetPotStatusAtLocation(i, j))
             {
                 case PaincakePotStatus.Empty:
-                    TileNumber = SyrupCookingPotEmptyFrame;
+                    TileNumber = TurkeyFryerEmptyFrame;
                     break;
                 case PaincakePotStatus.Processing:
                     frameCount++;
                     int StyleNumber = WorkingAnimationFrames - (int) (GetPotTicksLeftAtLocation(i, j) / TicksPerAnimationFrame);
                     TileNumber = (StyleNumber * SyrupStylesPerFrame) + ((frameCount / 8) % SyrupStylesPerFrame) + 1;
-                    TileNumber = Math.Min(TileNumber, SyrupCookingPotFinishedFrame - 1);
+                    TileNumber = Math.Min(TileNumber, TurkeyFryerFinishedFrame - 1);
                     break;
                 case PaincakePotStatus.Finished:
-                    TileNumber = SyrupCookingPotFinishedFrame;
+                    TileNumber = TurkeyFryerFinishedFrame;
                     break;
                 default:
-                    TileNumber = SyrupCookingPotFinishedFrame; 
+                    TileNumber = TurkeyFryerFinishedFrame; 
                     break;
             }
 

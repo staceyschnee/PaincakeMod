@@ -156,7 +156,7 @@ Mods: {
 				Tooltip: 5% increased Paincake Damage, 5% increased Critical Strike chance; 5 minute duration
 			}
 
-			SyrupCookingPot: {
+			TurkeyFryer: {
 				DisplayName: Syrup Cooking Pot
 				Tooltip: ""
 			}

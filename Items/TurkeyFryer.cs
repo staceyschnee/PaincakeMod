@@ -14,18 +14,19 @@ using PaincakeMod.Tiles;
 
 namespace PaincakeMod.Items
 {
-	class SyrupCookingPot : ModItem
+	class TurkeyFryer : ModItem
 	{
 		public override void SetStaticDefaults()
 		{
+
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}
 
 		public override void SetDefaults()
 		{
 			Item.width = 26;
-			Item.height = 29;
-			Item.value = 1000;
+			Item.height = 30;
+			Item.value = 1200;
 			Item.useAnimation = 15;
 			Item.useTime = 10;
 			Item.useStyle = ItemUseStyleID.Swing;
@@ -35,7 +36,7 @@ namespace PaincakeMod.Items
 			Item.consumable = true;
 			Item.useTurn = true;
 			Item.maxStack = 9999;
-			Item.createTile = ModContent.TileType<SyrupCookingPotTile>();
+			Item.createTile = ModContent.TileType<TurkeyFryerTile>();
 		}
 		public override void AddRecipes()
 		{
