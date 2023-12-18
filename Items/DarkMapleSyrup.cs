@@ -29,7 +29,7 @@ namespace PaincakeMod.Items
             Item.useTurn = true;
             Item.UseSound = SoundID.Item3;
             Item.value = Item.buyPrice(gold: 1, silver: 25);
-            Item.buffType = ModContent.BuffType<ExtraDarkMapleBuff>();
+            Item.buffType = ModContent.BuffType<DarkMapleBuff>();
             Item.buffTime = 60 * 60 * 5; // The amount of time the buff declared in Item.buffType will last in ticks. 
 
         }
