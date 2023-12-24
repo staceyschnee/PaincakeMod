@@ -30,8 +30,11 @@ namespace PaincakeMod.Tiles
 			Main.tileObsidianKill[Type] = true;
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
 			TileObjectData.newTile.LavaDeath = false;
-			TileObjectData.addTile(Type);
-			TileObjectData.newTile.DrawYOffset = 2;
+            TileObjectData.newTile.CoordinateHeights = new int[] { 16, 18 };
+            TileObjectData.newTile.CoordinateWidth = 16;
+            TileObjectData.newTile.CoordinatePadding = 0;
+            TileObjectData.newTile.DrawYOffset = 2;
+            TileObjectData.addTile(Type);
 			AddMapEntry(new Color(200, 200, 200), Language.GetText("MapObject.Griddle"));
 
 			//Can't use this since texture is vertical
