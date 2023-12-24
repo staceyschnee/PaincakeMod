@@ -34,7 +34,7 @@ namespace PaincakeMod.NPCs
 
 		public override void SetDefaults()
 		{
-			NPC.width = 35;
+			NPC.width = 31;
 			NPC.height = 30;
 			NPC.damage = 0;
 			NPC.defense = 0;
@@ -43,7 +43,7 @@ namespace PaincakeMod.NPCs
 			NPC.DeathSound = SoundID.NPCDeath1;
 			NPC.value = 15f;
 			NPC.knockBackResist = 0f;
-			NPC.aiStyle = 7; // Fighter AI, important to choose the aiStyle that matches the NPCID that we want to mimic
+			NPC.aiStyle = NPCAIStyleID.Passive; // Fighter AI, important to choose the aiStyle that matches the NPCID that we want to mimic
 			NPC.catchItem = (short)ModContent.ItemType<ChickenItem>();
 
 			AIType = NPCID.Squirrel;
@@ -129,7 +129,7 @@ namespace PaincakeMod.NPCs
 			Item.useTime = 10;
 			Item.maxStack = 9999;
 			Item.consumable = true;
-			Item.width = 35;
+			Item.width = 31;
 			Item.height = 30;
 			Item.noUseGraphic = true;
 			
