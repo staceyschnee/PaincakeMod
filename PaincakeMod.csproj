@@ -10,6 +10,9 @@
   <ItemGroup>
     <None Remove="Buffs\BuffTemplate - Copy.png" />
     <None Remove="NPCs\CowRight.png" />
+    <None Remove="Projectiles\CerealSpoonBoomerangProjectile.png" />
+    <None Remove="Projectiles\CerealSpoonStabProjectile.png" />
+    <None Remove="Projectiles\CerealSpoonSwingProjectile.png" />
     <None Remove="Tiles\CowPenTileNew.png" />
     <None Remove="Tiles\TapBucketTileLarge.png" />
   </ItemGroup>

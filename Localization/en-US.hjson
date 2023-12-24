@@ -23,7 +23,7 @@ Mods: {
 
 			GrindingMill: {
 				DisplayName: Grinding Mill
-				Tooltip: SPecial Crafting; Makes Flour
+				Tooltip: Special Crafting; Makes Flour
 			}
 
 			SplatSword: {
@@ -107,8 +107,8 @@ Mods: {
 			}
 
 			Croissant: {
-				DisplayName: Croissant
-				Tooltip: ""
+				DisplayName: k(r)wä'säN
+				Tooltip: Prounounce it 'Correctly'
 			}
 
 			BlueberryPaincake: {
@@ -156,7 +156,7 @@ Mods: {
 				Tooltip:
 					'''
 					5% increased Paincake Damage
-					   5% increased Critical Strike chance
+					5% increased Critical Strike chance
 					5 minute duration
 					'''
 			}
@@ -166,8 +166,8 @@ Mods: {
 				Tooltip:
 					'''
 					Makes Dark Maple Syrup
-					   Place 2 SapBuckets in to start cooking
-					When finished, Use 2 Maple Bottle to get the finished syrup
+					Place 2 SapBuckets in to start cooking
+					When finished, Use 2 Maple Bottles to get the finished syrup
 					'''
 			}
 
@@ -176,7 +176,7 @@ Mods: {
 				Tooltip:
 					'''
 					15% increased Paincake Damage
-					   15% increased Critical Strike chance
+					15% increased Critical Strike chance
 					5 minute duration
 					'''
 			}
@@ -186,7 +186,7 @@ Mods: {
 				Tooltip:
 					'''
 					10% increased Paincake Damage
-					   10% increased Critical Strike chance
+					10% increased Critical Strike chance
 					5 minute duration
 					'''
 			}
@@ -196,7 +196,7 @@ Mods: {
 				Tooltip:
 					'''
 					20% increased Paincake Damage
-					   20% increased Critical Strike chance
+					20% increased Critical Strike chance
 					5 minute duration
 					'''
 			}
@@ -206,9 +206,14 @@ Mods: {
 				Tooltip:
 					'''
 					Makes Extra Dark Maple Syrup
-					   Place 1 SapBuckets in to start cooking
+					Place 1 SapBuckets in to start cooking
 					When finished, Use a Maple Bottle to get the finished syrup
 					'''
+			}
+
+			CerealSpoon: {
+				DisplayName: Cereal Spoon
+				Tooltip: Right click to change mode: Sword, Short Sword, Boomerang
 			}
 		}
 
@@ -227,6 +232,9 @@ Mods: {
 			ChocolateChipPaincakeProjectile.DisplayName: Chocolate Chip Paincake Projectile
 			SprinkleProjectile.DisplayName: Sprinkle Projectile
 			CerealProjectile.DisplayName: Cereal Projectile
+			CerealSpoonBoomerangProjectile.DisplayName: Cereal Spoon Boomerang Projectile
+			CerealSpoonStabProjectile.DisplayName: Cereal Spoon Stab Projectile
+			CerealSpoonSwingProjectile.DisplayName: Cereal Spoon Swing Projectile
 		}
 
 		Buffs: {
@@ -235,7 +243,7 @@ Mods: {
 				Description:
 					'''
 					5% Extra Paincake Damage
-					   5% increased Critical Strike chance
+					5% increased Critical Strike chance
 					5 minute duration
 					'''
 			}
@@ -245,7 +253,7 @@ Mods: {
 				Description:
 					'''
 					15% Extra Paincake Damage
-					   15% increased Critical Strike chance
+					15% increased Critical Strike chance
 					5 minute duration
 					'''
 			}
@@ -255,7 +263,7 @@ Mods: {
 				Description:
 					'''
 					10% Extra Paincake Damage
-					   10% increased Critical Strike chance
+					10% increased Critical Strike chance
 					5 minute duration
 					'''
 			}
@@ -265,7 +273,7 @@ Mods: {
 				Description:
 					'''
 					20% Extra Paincake Damage
-					   20% increased Critical Strike chance
+					20% increased Critical Strike chance
 					5 minute duration
 					'''
 			}
