@@ -245,7 +245,7 @@ namespace PaincakeMod.Tiles
                 case PaincakePotStatus.Processing:
                     frameCount++;
                     int StyleNumber = WorkingAnimationFrames - (int) (GetPotTicksLeftAtLocation(i, j) / TicksPerAnimationFrame);
-                    TileNumber = (StyleNumber * SyrupStylesPerFrame) + ((frameCount / 8) % SyrupStylesPerFrame) + 1;
+                    TileNumber = (StyleNumber * SyrupStylesPerFrame) + ((frameCount / 16) % SyrupStylesPerFrame) + 1;
                     TileNumber = Math.Min(TileNumber, SyrupCookingPotFinishedFrame - 1);
                     break;
                 case PaincakePotStatus.Finished:
