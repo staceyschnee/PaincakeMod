@@ -1,9 +1,11 @@
-﻿using Terraria;
+﻿using System;
+using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria.GameContent.Creative;
+
 
 using PaincakeMod.Projectiles;
 
@@ -16,7 +18,7 @@ namespace PaincakeMod.Items
 			// DisplayName.SetDefault("ChickenEgg"); // By default, capitalization in classnames will add spaces to the display name. You can customize the display name here by uncommenting this line.
 			//Tooltip.SetDefault("Its an egg silly.");
 
-			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 25;
+			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 2;
 		}
 
 		public override void SetDefaults()
@@ -41,12 +43,13 @@ namespace PaincakeMod.Items
 			Item.shoot = ModContent.ProjectileType<Projectiles.CroissantProjectile>();
 		}
 
-		/*public override bool CanUseItem(Player player)
+		public override bool CanUseItem(Player player)
 		{
 			// Ensures no more than one spear can be thrown out, use this when using autoReuse
-			return player.ownedProjectileCounts[Item.shoot] < 1;
-		}
-#if false
+			return player.ownedProjectileCounts[Item.shoot] < Math.Min(Item.stack, 5);
+        }
+
+/*#if false
 		public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
 			// NewProjectile returns the index of the projectile it creates in the NewProjectile array.
